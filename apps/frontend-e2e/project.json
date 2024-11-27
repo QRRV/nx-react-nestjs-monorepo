@@ -2,7 +2,7 @@
   "name": "nx-react-nestjs-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/nx-react-nestjs-e2e/src",
+  "sourceRoot": "apps/frontend-e2e/src",
   "tags": [],
   "implicitDependencies": ["nx-react-nestjs"],
   "// targets": "to see all targets run: nx show project nx-react-nestjs-e2e --web",

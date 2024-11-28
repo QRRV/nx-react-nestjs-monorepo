@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "data-backend",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/data-backend/src",
   "projectType": "application",
@@ -10,15 +10,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "backend:build",
+        "buildTarget": "data-backend:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "backend:build:development"
+          "buildTarget": "data-backend:build:development"
         },
         "production": {
-          "buildTarget": "backend:build:production"
+          "buildTarget": "data-backend:build:production"
         }
       }
     }

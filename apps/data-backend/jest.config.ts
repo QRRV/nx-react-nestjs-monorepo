@@ -1,5 +1,5 @@
 export default {
-  displayName: 'backend',
+  displayName: 'data-backend',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

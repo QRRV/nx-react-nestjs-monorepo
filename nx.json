@@ -50,7 +50,12 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/backend-e2e/**/*", "apps/rcmnd-backend-e2e/**/*"]
+      "exclude": [
+        "apps/backend-e2e/**/*",
+        "apps/rcmnd-backend-e2e/**/*",
+        "apps/data-backend-e2e/**/*",
+        "apps/rcmnd-backend-e2e/**/*"
+      ]
     },
     {
       "plugin": "@nx/webpack/plugin",

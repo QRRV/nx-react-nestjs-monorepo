@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ReviewModel, ReviewSchema } from './infrastructure/mongoose/schemas/reviewSchema';
+import { ReviewSchema } from './infrastructure/mongoose/schemas/reviewSchema';
 import { MongooseReviewCommandRepository } from './infrastructure/mongoose/repositories/mongooseReviewCommandRepository';
+import { MongooseReviewQueryRepository } from './infrastructure/mongoose/repositories/mongooseReviewQueryRepository';
 import { CreateReviewHandler } from './application/handlers/createReviewHandler';
+import { GetReviewsByMovieHandler } from './application/handlers/getReviewsByMovieHandler';
 import { CqrsModule } from '@nestjs/cqrs';
 
-const CommandHandlers = [CreateReviewHandler];
+const commandHandlers = [CreateReviewHandler];
+const queryHandlers = [GetReviewsByMovieHandler];
 
 @Module({
   imports: [
@@ -15,13 +18,17 @@ const CommandHandlers = [CreateReviewHandler];
     ]),
   ],
   providers: [
-    ...CommandHandlers,
+    ...commandHandlers,
+    ...queryHandlers,
     {
       provide: 'ReviewCommandRepository',
       useClass: MongooseReviewCommandRepository,
     },
-    CreateReviewHandler,
+    {
+      provide: 'ReviewQueryRepository',
+      useClass: MongooseReviewQueryRepository,
+    },
   ],
-  exports: [...CommandHandlers],
+  exports: [...commandHandlers, ...queryHandlers],
 })
 export class ReviewModule {}

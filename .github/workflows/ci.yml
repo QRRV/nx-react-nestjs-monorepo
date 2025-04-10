@@ -26,4 +26,4 @@ jobs:
         run: npx nx lint review
 
       - name: Run unit & integration tests
-        run: npx nx test review --ci --code-coverage
+        run: npx nx test review --ci --coverage

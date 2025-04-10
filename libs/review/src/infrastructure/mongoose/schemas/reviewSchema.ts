@@ -4,6 +4,9 @@ import { Document } from 'mongoose';
 @Schema({ collection: 'reviews' })
 export class ReviewModel extends Document {
   @Prop({ required: true })
+  override _id!: string;
+
+  @Prop({ required: true })
   userId!: string;
 
   @Prop({ required: true })

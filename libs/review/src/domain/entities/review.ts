@@ -1,6 +1,6 @@
 export class Review {
   constructor(
-    public readonly id: string,
+    public readonly _id: string,
     public readonly userId: string,
     public readonly movieId: string,
     public readonly rating: number,

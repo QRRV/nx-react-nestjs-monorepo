@@ -6,8 +6,9 @@ import { MongooseReviewQueryRepository } from './infrastructure/mongoose/reposit
 import { CreateReviewHandler } from './application/handlers/createReviewHandler';
 import { GetReviewsByMovieHandler } from './application/handlers/getReviewsByMovieHandler';
 import { CqrsModule } from '@nestjs/cqrs';
+import { UpdateReviewHandler } from './application/handlers/updateReviewHandler';
 
-const commandHandlers = [CreateReviewHandler];
+const commandHandlers = [CreateReviewHandler, UpdateReviewHandler];
 const queryHandlers = [GetReviewsByMovieHandler];
 
 @Module({

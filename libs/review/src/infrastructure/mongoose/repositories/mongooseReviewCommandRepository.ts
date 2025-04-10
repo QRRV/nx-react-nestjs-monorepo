@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { ReviewCommandRepository } from '../../../domain/ports/reviewCommandRepository';
 import { Review } from '../../../domain/entities/review';
 import { ReviewModel } from '../schemas/reviewSchema';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 
 export class MongooseReviewCommandRepository implements ReviewCommandRepository {
   constructor(
@@ -26,4 +27,33 @@ export class MongooseReviewCommandRepository implements ReviewCommandRepository 
   async delete(reviewId: string): Promise<void> {
     await this.model.deleteOne({ _id: reviewId });
   }
+
+  async update(reviewId: string, updates: { rating?: number; comment?: string; userId: string }): Promise<Review> {
+    const found = await this.model.findById(reviewId).exec();
+    if (!found) throw new NotFoundException('Review not found');
+
+    if (found.userId !== updates.userId) {
+      throw new UnauthorizedException('Unauthorized to update this review');
+    }
+
+    if (updates.rating !== undefined) {
+      found.rating = updates.rating;
+    }
+
+    if (updates.comment !== undefined) {
+      found.comment = updates.comment;
+    }
+
+    const saved = await found.save();
+
+    return new Review(
+      saved.id,
+      saved.userId,
+      saved.movieId,
+      saved.rating,
+      saved.comment,
+      saved.reviewDate,
+    );
+  }
+
 }

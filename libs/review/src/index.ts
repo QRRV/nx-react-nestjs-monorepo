@@ -4,3 +4,6 @@ export * from './application/commands/createReviewCommand';
 export * from './application/dto/createReviewDto';
 export * from './application/queries/getReviewsByMovieQuery';
 export * from './application/handlers/getReviewsByMovieHandler';
+export * from './application/handlers/updateReviewHandler';
+export * from './application/commands/updateReviewCommand';
+export * from './application/dto/updateReviewDto';

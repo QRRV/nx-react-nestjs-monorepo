@@ -7,3 +7,5 @@ export * from './application/handlers/getReviewsByMovieHandler';
 export * from './application/handlers/updateReviewHandler';
 export * from './application/commands/updateReviewCommand';
 export * from './application/dto/updateReviewDto';
+export * from './application/handlers/deleteReviewHandler';
+export * from './application/commands/deleteReviewCommand';

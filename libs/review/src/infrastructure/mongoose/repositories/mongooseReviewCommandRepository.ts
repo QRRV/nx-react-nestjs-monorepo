@@ -24,8 +24,9 @@ export class MongooseReviewCommandRepository implements ReviewCommandRepository 
     );
   }
 
-  async delete(reviewId: string): Promise<void> {
-    await this.model.deleteOne({ _id: reviewId });
+  async delete(reviewId: string, userId: string): Promise<boolean> {
+    const result = await this.model.deleteOne({ _id: reviewId, userId }).exec();
+    return result.deletedCount > 0;
   }
 
   async update(reviewId: string, updates: { rating?: number; comment?: string; userId: string }): Promise<Review> {

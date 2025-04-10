@@ -5,6 +5,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { GetReviewsByMovieController } from './review/controllers/getReviewsByMovieController';
 import { ReviewModule } from '@moviebuddy/review';
 import { UpdateReviewController } from './review/controllers/updateReviewController';
+import { DeleteReviewController } from './review/controllers/deleteReviewController';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { UpdateReviewController } from './review/controllers/updateReviewControl
   controllers: [
     CreateReviewController,
     GetReviewsByMovieController,
-    UpdateReviewController
+    UpdateReviewController,
+    DeleteReviewController
   ],
 })
 export class AppModule {}

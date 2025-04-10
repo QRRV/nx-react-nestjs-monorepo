@@ -15,8 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@moviebuddy/review": ["libs/review/src/index.ts"],
-      "@data-backend/app": ["apps/data-backend/src/app.module.ts"]
+      "@data-backend/app": ["apps/data-backend/src/app.module.ts"],
+      "@moviebuddy/movie": ["libs/movie/src/index.ts"],
+      "@moviebuddy/review": ["libs/review/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -7,19 +7,34 @@ import { ReviewModule } from '@moviebuddy/review';
 import { UpdateReviewController } from './review/controllers/updateReviewController';
 import { DeleteReviewController } from './review/controllers/deleteReviewController';
 import { GetReviewsByUserController } from './review/controllers/getReviewsByUserController';
+import { MovieModule } from '@moviebuddy/movie';
+import { GetMovieByIdController } from './movie/controllers/getMovieByIdController';
+import { GetMoviesController } from './movie/controllers/getMoviesController';
+
+
+const reviewControllers = [
+  CreateReviewController,
+  GetReviewsByMovieController,
+  UpdateReviewController,
+  DeleteReviewController,
+  GetReviewsByUserController,
+];
+
+const movieControllers = [
+  GetMovieByIdController,
+  GetMoviesController
+];
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/moviebuddy'),
     CqrsModule,
     ReviewModule,
+    MovieModule
   ],
   controllers: [
-    CreateReviewController,
-    GetReviewsByMovieController,
-    UpdateReviewController,
-    DeleteReviewController,
-    GetReviewsByUserController
+    ...reviewControllers,
+    ...movieControllers,
   ],
 })
 export class AppModule {}

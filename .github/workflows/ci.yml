@@ -22,8 +22,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run lint
-        run: npx nx lint review
+      - name: Lint review and movie libs
+        run: |
+          npx nx lint review
+          npx nx lint movie
 
-      - name: Run unit & integration tests
-        run: npx nx test review --ci --coverage
+      - name: Test review and movie libs
+        run: |
+          npx nx test review --ci --coverage
+          npx nx test movie --ci --coverage

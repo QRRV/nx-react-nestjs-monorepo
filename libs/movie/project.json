@@ -1,0 +1,9 @@
+{
+  "name": "movie",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/movie/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project movie --web",
+  "targets": {}
+}

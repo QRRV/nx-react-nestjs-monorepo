@@ -25,9 +25,17 @@ export class MongooseReviewCommandRepository implements ReviewCommandRepository 
   }
 
   async delete(reviewId: string, userId: string): Promise<boolean> {
-    const result = await this.model.deleteOne({ _id: reviewId, userId }).exec();
-    return result.deletedCount > 0;
+    const found = await this.model.findById(reviewId).exec()
+    if (!found) throw new NotFoundException('Review not found')
+
+    if (found.userId !== userId) {
+      throw new UnauthorizedException('Unauthorized to delete this review')
+    }
+
+    const result = await this.model.deleteOne({ _id: reviewId }).exec()
+    return result.deletedCount > 0
   }
+
 
   async update(reviewId: string, updates: { rating?: number; comment?: string; userId: string }): Promise<Review> {
     const found = await this.model.findById(reviewId).exec();

@@ -24,4 +24,20 @@ export class MongooseReviewQueryRepository implements ReviewQueryRepository {
         ),
     );
   }
+
+  async findByUserId(userId: string): Promise<Review[]> {
+    const results = await this.model.find({ userId }).exec();
+    return results.map(
+      (doc) =>
+        new Review(
+          doc.id,
+          doc.userId,
+          doc.movieId,
+          doc.rating,
+          doc.comment,
+          doc.reviewDate,
+        ),
+    );
+  }
+
 }

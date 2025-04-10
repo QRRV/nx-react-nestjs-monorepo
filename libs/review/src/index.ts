@@ -9,3 +9,5 @@ export * from './application/commands/updateReviewCommand';
 export * from './application/dto/updateReviewDto';
 export * from './application/handlers/deleteReviewHandler';
 export * from './application/commands/deleteReviewCommand';
+export * from './application/queries/getReviewsByUserQuery';
+export * from './application/handlers/getReviewsByUserHandler';

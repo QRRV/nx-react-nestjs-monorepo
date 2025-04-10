@@ -6,6 +6,7 @@ import { GetReviewsByMovieController } from './review/controllers/getReviewsByMo
 import { ReviewModule } from '@moviebuddy/review';
 import { UpdateReviewController } from './review/controllers/updateReviewController';
 import { DeleteReviewController } from './review/controllers/deleteReviewController';
+import { GetReviewsByUserController } from './review/controllers/getReviewsByUserController';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { DeleteReviewController } from './review/controllers/deleteReviewControl
     CreateReviewController,
     GetReviewsByMovieController,
     UpdateReviewController,
-    DeleteReviewController
+    DeleteReviewController,
+    GetReviewsByUserController
   ],
 })
 export class AppModule {}

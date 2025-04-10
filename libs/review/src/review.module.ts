@@ -8,13 +8,17 @@ import { GetReviewsByMovieHandler } from './application/handlers/getReviewsByMov
 import { CqrsModule } from '@nestjs/cqrs';
 import { UpdateReviewHandler } from './application/handlers/updateReviewHandler';
 import { DeleteReviewHandler } from './application/handlers/deleteReviewHandler';
+import { GetReviewsByUserHandler } from './application/handlers/getReviewsByUserHandler';
 
 const commandHandlers = [
   CreateReviewHandler,
   UpdateReviewHandler,
   DeleteReviewHandler
 ];
-const queryHandlers = [GetReviewsByMovieHandler];
+const queryHandlers = [
+  GetReviewsByMovieHandler,
+  GetReviewsByUserHandler
+];
 
 @Module({
   imports: [

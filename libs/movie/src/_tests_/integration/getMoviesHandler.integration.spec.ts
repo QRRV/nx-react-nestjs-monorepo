@@ -5,6 +5,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
 import { MovieSchema } from '../../infrastructure/mongoose/schemas/movieSchema'
 import { MongooseMovieQueryRepository } from '../../infrastructure/mongoose/repositories/mongooseMovieQueryRepository'
 import { GetMoviesHandler } from '../../application/handlers/getMoviesHandler'
+import { Movie } from '../../domain/entities/movie'
 
 describe('GetMoviesHandler Integration', () => {
   jest.setTimeout(20000)

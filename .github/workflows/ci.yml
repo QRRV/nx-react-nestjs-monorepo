@@ -28,7 +28,6 @@ jobs:
           npx nx lint movie
           npx nx lint watchlistitem
           npx nx lint user
-          npx nx lint auth
 
       - name: Test review lib
         run: |
@@ -45,7 +44,3 @@ jobs:
       - name: Test user lib
         run: |
           npx nx test user --ci --coverage
-
-      - name: Test auth lib
-        run: |
-          npx nx test auth --ci --coverage

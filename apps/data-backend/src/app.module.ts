@@ -15,6 +15,11 @@ import { WatchlistitemModule } from '@moviebuddy/watchlistitem';
 import { GetWatchlistByUserController } from './watchlistitem/controllers/getWatchlistByUserController';
 import { UpdateWatchlistItemController } from './watchlistitem/controllers/updateWatchlistItemController';
 import { DeleteWatchlistItemController } from './watchlistitem/controllers/deleteWatchlistItemController';
+import { CreateUserController } from './user/controllers/createUserController';
+import { UserModule } from '@moviebuddy/user';
+import { GetUserByIdController } from './user/controllers/getUserByIdController';
+import { UpdateUserController } from './user/controllers/updateUserController';
+import { DeleteUserController } from './user/controllers/deleteUserController';
 
 
 const reviewControllers = [
@@ -37,18 +42,27 @@ const watchlistItemControllers = [
   DeleteWatchlistItemController
 ];
 
+const userControllers = [
+  CreateUserController,
+  GetUserByIdController,
+  UpdateUserController,
+  DeleteUserController
+];
+
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/moviebuddy'),
     CqrsModule,
     ReviewModule,
     MovieModule,
-    WatchlistitemModule
+    WatchlistitemModule,
+    UserModule
   ],
   controllers: [
     ...reviewControllers,
     ...movieControllers,
     ...watchlistItemControllers,
+    ...userControllers
   ],
 })
 export class AppModule {}

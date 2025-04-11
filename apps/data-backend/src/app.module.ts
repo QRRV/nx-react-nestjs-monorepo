@@ -20,6 +20,9 @@ import { UserModule } from '@moviebuddy/user';
 import { GetUserByIdController } from './user/controllers/getUserByIdController';
 import { UpdateUserController } from './user/controllers/updateUserController';
 import { DeleteUserController } from './user/controllers/deleteUserController';
+import { RegisterController } from './auth/controllers/registerController';
+import { LoginController } from './auth/controllers/loginController';
+import { AuthModule } from '@moviebuddy/auth';
 
 
 const reviewControllers = [
@@ -49,6 +52,11 @@ const userControllers = [
   DeleteUserController
 ];
 
+const authControllers = [
+  RegisterController,
+  LoginController,
+];
+
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/moviebuddy'),
@@ -56,13 +64,15 @@ const userControllers = [
     ReviewModule,
     MovieModule,
     WatchlistitemModule,
-    UserModule
+    UserModule,
+    AuthModule,
   ],
   controllers: [
     ...reviewControllers,
     ...movieControllers,
     ...watchlistItemControllers,
-    ...userControllers
+    ...userControllers,
+    ...authControllers,
   ],
 })
 export class AppModule {}

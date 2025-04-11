@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@data-backend/app": ["apps/data-backend/src/app.module.ts"],
+      "@moviebuddy/auth": ["libs/auth/src/index.ts"],
       "@moviebuddy/movie": ["libs/movie/src/index.ts"],
       "@moviebuddy/review": ["libs/review/src/index.ts"],
       "@moviebuddy/user": ["libs/user/src/index.ts"],

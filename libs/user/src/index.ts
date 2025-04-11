@@ -9,4 +9,5 @@ export * from './application/commands/updateUserCommand';
 export * from './application/handlers/updateUserHandler';
 export * from './application/commands/deleteUserCommand';
 export * from './application/handlers/deleteUserHandler';
+export * from './domain/entities/user';
 

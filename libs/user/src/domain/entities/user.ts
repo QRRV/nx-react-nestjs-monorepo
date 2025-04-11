@@ -6,4 +6,13 @@ export class User {
     public readonly password: string,
     public readonly bio: string
   ) {}
+
+  toSafeObject() {
+    return {
+      id: this.id,
+      username: this.username,
+      email: this.email,
+      bio: this.bio
+    };
+  }
 }

@@ -1,21 +1,20 @@
-import { IsOptional, IsString, MinLength, Matches } from 'class-validator';
+import { IsEmail, IsString, MinLength, Matches } from 'class-validator';
 
-export class UpdateUserDto {
-
-  @IsOptional()
+export class RegisterUserDto {
   @IsString()
-  username?: string;
+  username!: string;
 
-  @IsOptional()
+  @IsEmail()
+  email!: string;
+
   @IsString()
   @MinLength(8)
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/, {
     message:
       'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character',
   })
-  password?: string;
+  password!: string;
 
-  @IsOptional()
   @IsString()
-  bio?: string;
+  bio!: string;
 }

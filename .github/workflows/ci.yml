@@ -22,12 +22,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Lint review and movie libs
+      - name: Lint all libs
         run: |
           npx nx lint review
           npx nx lint movie
+          npx nx lint watchlistitem
 
-      - name: Test review and movie libs
+      - name: Test review lib
         run: |
           npx nx test review --ci --coverage
+
+      - name: Test movie lib
+        run: |
           npx nx test movie --ci --coverage
+
+      - name: Test watchlistitem lib
+        run: |
+          npx nx test watchlistitem --ci --coverage

@@ -17,7 +17,8 @@
     "paths": {
       "@data-backend/app": ["apps/data-backend/src/app.module.ts"],
       "@moviebuddy/movie": ["libs/movie/src/index.ts"],
-      "@moviebuddy/review": ["libs/review/src/index.ts"]
+      "@moviebuddy/review": ["libs/review/src/index.ts"],
+      "@moviebuddy/watchlistitem": ["libs/watchlistitem/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

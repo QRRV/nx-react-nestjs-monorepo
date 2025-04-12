@@ -22,6 +22,7 @@ import { DeleteUserController } from './user/controllers/deleteUserController';
 import { RegisterController } from './auth/controllers/registerController';
 import { LoginController } from './auth/controllers/loginController';
 import { AuthModule } from '@moviebuddy/auth';
+import * as process from 'node:process';
 
 
 const reviewControllers = [
@@ -57,7 +58,7 @@ const authControllers = [
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/moviebuddy'),
+    MongooseModule.forRoot(process.env['MONGODB_URI'] || 'mongodb://localhost:27017/moviebuddy'),
     CqrsModule,
     ReviewModule,
     MovieModule,

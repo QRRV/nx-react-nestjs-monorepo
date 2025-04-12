@@ -1,0 +1,9 @@
+{
+  "name": "review-graph",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/review-graph/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project review-graph --web",
+  "targets": {}
+}

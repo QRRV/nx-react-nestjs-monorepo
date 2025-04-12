@@ -28,6 +28,7 @@ jobs:
           npx nx lint movie
           npx nx lint watchlistitem
           npx nx lint user
+          npx nx lint review-graph
 
       - name: Test review lib
         run: |
@@ -44,3 +45,7 @@ jobs:
       - name: Test user lib
         run: |
           npx nx test user --ci --coverage
+
+      - name: Test review-graph lib
+        run: |
+          npx nx test review-graph --ci --coverage

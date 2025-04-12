@@ -1,4 +1,5 @@
 export * from './auth.module';
+export * from './auth-support.module';
 export * from './application/dto/loginUserDto';
 export * from './application/queries/loginUserQuery';
 export * from './application/handlers/loginUserHandler';

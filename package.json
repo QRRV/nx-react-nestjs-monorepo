@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "lint": "npx nx lint review && npx nx lint movie && npx nx lint watchlistitem"
+    "lint": "npx nx lint auth && npx nx lint movie && npx nx lint movielistitem-graph && npx nx lint review && npx nx lint review-graph && npx nx lint user && npx nx lint watchlistitem && npx nx lint watchlistitem-graph",
+    "test": "npx nx test auth --ci && npx nx test movie --ci && npx nx test movielistitem-graph --ci && npx nx test review --ci && npx nx test review-graph --ci && npx nx test user --ci && npx nx test watchlistitem --ci && npx nx test watchlistitem-graph --ci"
   },
   "private": true,
   "dependencies": {
@@ -40,7 +41,7 @@
     "@nx/jest": "20.1.3",
     "@nx/js": "20.1.3",
     "@nx/nest": "20.1.3",
-    "@nx/node": "20.1.3",
+    "@nx/node": "^20.1.3",
     "@nx/react": "20.1.3",
     "@nx/vite": "20.1.3",
     "@nx/web": "20.1.3",

@@ -11,7 +11,6 @@ import { MongooseAuthQueryRepository } from './infrastructure/mongoose/repositor
 import { MongooseAuthCommandRepository } from './infrastructure/mongoose/repositories/mongooseAuthCommandRepository';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthUserSchema } from './infrastructure/mongoose/schemas/authUserSchema';
-import { JwtAuthGuard } from './interfaces/guards/jwtAuthGuard';
 
 @Module({
   imports: [

@@ -1,7 +1,6 @@
 import { RegisterUserHandler } from '../../application/handlers/registerUserHandler';
 import { RegisterUserCommand } from '../../application/commands/registerUserCommand';
 import { User } from '@moviebuddy/user';
-import * as bcrypt from 'bcrypt';
 
 describe('RegisterUserHandler', () => {
   let handler: RegisterUserHandler;

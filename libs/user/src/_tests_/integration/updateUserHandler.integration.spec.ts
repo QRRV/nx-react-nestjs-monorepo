@@ -1,4 +1,4 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose, { Model } from 'mongoose';
@@ -68,7 +68,7 @@ describe('UpdateUserHandler Integration', () => {
   });
 
   it('should throw error if user is not the owner', async () => {
-    const createdUser = await userModel.create({
+    await userModel.create({
       _id: 'user-id-123',
       username: 'quinn',
       email: 'quinn@example.com',

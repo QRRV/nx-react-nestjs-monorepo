@@ -9,10 +9,11 @@ import { MongooseAuthQueryRepository } from '../../infrastructure/mongoose/repos
 import { JwtService } from '../../infrastructure/services/jwt.service';
 import * as bcrypt from 'bcrypt';
 import { JwtModule } from '@nestjs/jwt';
+import { User } from '@moviebuddy/user';
 
 describe('LoginUserHandler Integration', () => {
   let handler: LoginUserHandler;
-  let userModel: Model<any>;
+  let userModel: Model<User>;
   let mongoServer: MongoMemoryServer;
   let moduleRef: TestingModule;
 

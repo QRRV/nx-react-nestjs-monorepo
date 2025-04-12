@@ -1,9 +1,7 @@
-import { IsString, IsOptional, IsInt, Min } from 'class-validator'
+import { IsString, IsOptional, IsInt, Min, IsNotEmpty } from 'class-validator';
 
 export class createWatchlistItemDto {
-  @IsString()
-  userId!: string
-
+  @IsNotEmpty()
   @IsString()
   movieId!: string
 

@@ -1,9 +1,8 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsNotEmpty } from 'class-validator';
 
 export class CreateReviewDto {
-  @IsString()
-  userId!: string;
 
+  @IsNotEmpty()
   @IsString()
   movieId!: string;
 
@@ -11,6 +10,7 @@ export class CreateReviewDto {
   rating!: number;
 
   @IsOptional()
+  @IsNotEmpty()
   @IsString()
   comment?: string;
 }

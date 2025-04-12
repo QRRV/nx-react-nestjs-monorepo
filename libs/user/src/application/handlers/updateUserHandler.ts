@@ -12,16 +12,19 @@ export class UpdateUserHandler implements ICommandHandler<UpdateUserCommand> {
     private readonly repo: UserCommandRepository
   ) {}
 
-  async execute(command: UpdateUserCommand): Promise<User> {
+  async execute(command: UpdateUserCommand): Promise<any> {
     const updates = { ...command.updates };
 
     if (updates.password) {
       updates.password = await bcrypt.hash(updates.password, 10);
     }
 
-    return this.repo.update(command.targetUserId, {
+    const updated = await this.repo.update(command.targetUserId, {
       ...updates,
       userId: command.requestingUserId
     });
+
+    return updated.toSafeObject();
   }
+
 }

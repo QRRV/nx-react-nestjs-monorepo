@@ -15,7 +15,6 @@ import { WatchlistitemModule } from '@moviebuddy/watchlistitem';
 import { GetWatchlistByUserController } from './watchlistitem/controllers/getWatchlistByUserController';
 import { UpdateWatchlistItemController } from './watchlistitem/controllers/updateWatchlistItemController';
 import { DeleteWatchlistItemController } from './watchlistitem/controllers/deleteWatchlistItemController';
-import { CreateUserController } from './user/controllers/createUserController';
 import { UserModule } from '@moviebuddy/user';
 import { GetUserByIdController } from './user/controllers/getUserByIdController';
 import { UpdateUserController } from './user/controllers/updateUserController';
@@ -46,7 +45,6 @@ const watchlistItemControllers = [
 ];
 
 const userControllers = [
-  CreateUserController,
   GetUserByIdController,
   UpdateUserController,
   DeleteUserController

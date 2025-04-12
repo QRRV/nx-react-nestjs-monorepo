@@ -1,9 +1,6 @@
-import { IsOptional, IsBoolean, IsInt, Min, IsString } from 'class-validator'
+import { IsOptional, IsBoolean, IsInt, Min } from 'class-validator'
 
 export class updateWatchlistItemDto {
-  @IsString()
-  userId!: string
-
   @IsOptional()
   @IsBoolean()
   watched?: boolean

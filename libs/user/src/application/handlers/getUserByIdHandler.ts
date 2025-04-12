@@ -14,10 +14,6 @@ export class GetUserByIdHandler implements IQueryHandler<GetUserByIdQuery> {
     const user = await this.repo.findById(query.id);
     if (!user) throw new NotFoundException('User not found');
 
-    return {
-      id: user.id,
-      username: user.username,
-      bio: user.bio,
-    };
+    return user.toSafeObject();
   }
 }

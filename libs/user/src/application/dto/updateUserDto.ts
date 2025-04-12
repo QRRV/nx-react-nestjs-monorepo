@@ -1,4 +1,4 @@
-import { IsOptional, IsString, MinLength, Matches } from 'class-validator';
+import { IsOptional, IsString, MinLength, Matches, IsNotEmpty } from 'class-validator';
 
 export class UpdateUserDto {
 
@@ -7,6 +7,7 @@ export class UpdateUserDto {
   username?: string;
 
   @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(8)
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/, {
@@ -16,6 +17,7 @@ export class UpdateUserDto {
   password?: string;
 
   @IsOptional()
+  @IsNotEmpty()
   @IsString()
   bio?: string;
 }

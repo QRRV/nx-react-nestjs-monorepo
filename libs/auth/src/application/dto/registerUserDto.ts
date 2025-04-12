@@ -1,6 +1,7 @@
-import { IsEmail, IsString, MinLength, Matches } from 'class-validator';
+import { IsEmail, IsString, MinLength, Matches, IsNotEmpty } from 'class-validator';
 
 export class RegisterUserDto {
+  @IsNotEmpty()
   @IsString()
   username!: string;
 
@@ -15,6 +16,7 @@ export class RegisterUserDto {
   })
   password!: string;
 
+  @IsNotEmpty()
   @IsString()
   bio!: string;
 }

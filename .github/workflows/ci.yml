@@ -31,7 +31,6 @@ jobs:
           npx nx lint review-graph
           npx nx lint user
           npx nx lint watchlistitem
-          npx nx lint watchlistitem-graph
 
       - name: Test all libs
         run: |
@@ -42,4 +41,3 @@ jobs:
           npx nx test review-graph --ci --coverage
           npx nx test user --ci --coverage
           npx nx test watchlistitem --ci --coverage
-          npx nx test watchlistitem-graph --ci --coverage

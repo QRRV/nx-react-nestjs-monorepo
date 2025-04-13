@@ -1,7 +1,7 @@
 export class UpdateUserCommand {
   constructor(
-    public readonly targetUserId: string, // ID in de URL
-    public readonly requestingUserId: string, // ID uit JWT
+    public readonly targetUserId: string,
+    public readonly requestingUserId: string,
     public readonly updates: {
       username?: string;
       password?: string;

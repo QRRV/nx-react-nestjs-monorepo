@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy frontend and backend app to Azure
+name: Build and deploy data-backend to Azure
 
 on:
   push:
@@ -12,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build and zip apps from /dist
+    name: Build and prepare data-backend
     steps:
       - uses: actions/checkout@v4
 
@@ -21,26 +18,31 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install, build, and test
-        run: |
-          npm install
-          npm run build --if-present
-          # npm run test --if-present
+      - name: Install dependencies
+        run: npm install
 
-      - name: Zip artifacts for deployment
-        run: |
-          echo ${GITHUB_WORKSPACE}
-          cd ${GITHUB_WORKSPACE}/dist/apps/data-backend/ && zip ${GITHUB_WORKSPACE}/data-backend-release.zip ./* -r
+      - name: Build data-backend
+        run: npx nx build data-backend
 
-      - name: Upload data-backend artifact for deployment job
+      - name: Install runtime dependencies in dist
+        run: |
+          cd dist/apps/data-backend
+          npm install --omit=dev
+
+      - name: Zip data-backend for deployment
+        run: |
+          cd dist/apps/data-backend
+          zip -r ../../data-backend-release.zip .
+
+      - name: Upload artifact for deploy step
         uses: actions/upload-artifact@v4
         with:
           name: data-backend
-          path: data-backend-release.zip
+          path: dist/data-backend-release.zip
 
   deploy-data-api:
     runs-on: ubuntu-latest
-    name: Deploy NestJs data-backend backend
+    name: Deploy NestJs data-backend
     needs: build
     environment:
       name: 'Production'
@@ -52,13 +54,10 @@ jobs:
         with:
           name: data-backend
 
-      - name: Unzip artifact for deployment
+      - name: Unzip artifact
         run: unzip data-backend-release.zip
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:

@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "npx nx run-many --target=lint --all",
-    "test": "npx nx run-many --target=test --all --ci --passWithNoTests"
+    "test": "npx nx run-many --target=test --all --ci --passWithNoTests",
+    "build": "npx nx run-many --target=build --all"
   },
   "private": true,
   "dependencies": {

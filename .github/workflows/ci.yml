@@ -44,8 +44,11 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install runtime dependencies in dist
+        run: |
+          cd dist/apps/data-backend
+          npm install --omit=dev
+
 
       - name: Build only data-backend
         run: npx nx build data-backend

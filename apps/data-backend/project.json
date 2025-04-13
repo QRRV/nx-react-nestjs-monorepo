@@ -21,6 +21,26 @@
           "buildTarget": "data-backend:build:production"
         }
       }
+    },
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/data-backend",
+        "main": "apps/data-backend/src/main.ts",
+        "tsConfig": "apps/data-backend/tsconfig.app.json",
+        "assets": ["apps/data-backend/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/data-backend/webpack.config.js",
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
     }
   }
 }

@@ -1,14 +1,14 @@
-name: CI
+name: CI and Deploy data-backend
 
 on:
   push:
     branches:
-      - main
-      - dev
+      - release
   pull_request:
 
 jobs:
-  build-and-test:
+  lint-and-test:
+    name: Lint & Test All Projects
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +27,39 @@ jobs:
 
       - name: Test all projects
         run: npx nx run-many --target=test --all --ci --coverage --passWithNoTests
+
+  deploy-data-backend:
+    name: Build & Deploy data-backend
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build only data-backend
+        run: npx nx build data-backend
+
+      - name: Zip data-backend artifact
+        run: |
+          cd dist/apps/data-backend && zip -r data-backend-release.zip .
+          mv data-backend-release.zip ${{ github.workspace }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'data-backend'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
+          package: data-backend-release.zip

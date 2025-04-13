@@ -24,6 +24,19 @@ jobs:
       - name: Build data-backend
         run: npx nx build data-backend
 
+      - name: Inject production .env file
+        run: |
+          cat <<EOF > dist/apps/data-backend/.env
+          JWT_SECRET=${{ secrets.JWT_SECRET }}
+          MONGO_URI=${{ secrets.MONGO_URI }}
+          NEO4J_SCHEME=${{ secrets.NEO4J_SCHEME }}
+          NEO4J_HOST=${{ secrets.NEO4J_HOST }}
+          NEO4J_PORT=${{ secrets.NEO4J_PORT }}
+          NEO4J_USERNAME=${{ secrets.NEO4J_USERNAME }}
+          NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }}
+          RCMND_API_URL=${{ secrets.RCMND_API_URL }}
+          EOF
+
       - name: Install runtime dependencies in dist
         run: |
           cd dist/apps/data-backend

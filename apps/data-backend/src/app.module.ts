@@ -59,7 +59,7 @@ const authControllers = [
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env['MONGODB_URI'] || 'mongodb://localhost:27017/moviebuddy'),
+    MongooseModule.forRoot(process.env['MONGO_URI'] || 'mongodb://localhost:27017/moviebuddy'),
     CqrsModule,
     ReviewModule,
     MovieModule,

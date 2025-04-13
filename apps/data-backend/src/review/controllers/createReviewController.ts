@@ -11,11 +11,12 @@ export class CreateReviewController {
   @Post()
   async create(@Body() dto: CreateReviewDto, @Req() req: any) {
     const userId = req.user.id;
-
+    const token = req.headers.authorization.split(' ')[1];
     const command = new CreateReviewCommand(
       userId,
       dto.movieId,
       dto.rating,
+      token,
       dto.comment
     );
 

@@ -10,10 +10,10 @@ describe('DeleteMovieListItemRelationHandler', () => {
     };
 
     const handler = new DeleteMovieListItemRelationHandler(repo);
-    const command = new DeleteMovieListItemRelationCommand('user-1', 'movie-1');
+    const command = new DeleteMovieListItemRelationCommand('user-1', 'item-1');
 
     await handler.execute(command);
 
-    expect(repo.deleteMovieListItemRelation).toHaveBeenCalledWith('user-1', 'movie-1');
+    expect(repo.deleteMovieListItemRelation).toHaveBeenCalledWith('user-1', 'item-1');
   });
 });

@@ -30,6 +30,13 @@ describe('DeleteWatchlistItemHandler Integration', () => {
         {
           provide: 'WatchlistItemCommandRepository',
           useClass: MongooseWatchlistItemCommandRepository
+        },
+        {
+          provide: 'WatchlistGraphCommandRepository',
+          useValue: {
+            createMovieListItemRelation: jest.fn(),
+            deleteMovieListItemRelation: jest.fn()
+          }
         }
       ]
     }).compile()
@@ -54,7 +61,7 @@ describe('DeleteWatchlistItemHandler Integration', () => {
       priority: 2
     })
 
-    const command = new DeleteWatchlistItemCommand('delete-me', 'user123')
+    const command = new DeleteWatchlistItemCommand('delete-me', 'user123', 'valid-token')
 
     await expect(handler.execute(command)).resolves.not.toThrow()
 
@@ -63,7 +70,7 @@ describe('DeleteWatchlistItemHandler Integration', () => {
   })
 
   it('should throw NotFoundException if item does not exist', async () => {
-    const command = new DeleteWatchlistItemCommand('non-existent', 'userX')
+    const command = new DeleteWatchlistItemCommand('non-existent', 'userX', 'valid-token')
 
     await expect(handler.execute(command)).rejects.toThrow('Watchlist item not found')
   })
@@ -78,7 +85,7 @@ describe('DeleteWatchlistItemHandler Integration', () => {
       priority: 3
     })
 
-    const command = new DeleteWatchlistItemCommand('owned-by-someone', 'intruder')
+    const command = new DeleteWatchlistItemCommand('owned-by-someone', 'intruder', 'valid-token')
 
     await expect(handler.execute(command)).rejects.toThrow('Not allowed to delete this watchlist item')
   })

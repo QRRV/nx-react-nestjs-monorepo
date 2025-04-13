@@ -7,4 +7,8 @@ export class CreateReviewRelationDto {
 
   @IsNumber()
   rating!: number;
+
+  @IsString()
+  @IsNotEmpty()
+  reviewId!: string;
 }

@@ -8,25 +8,27 @@ export class Neo4jReviewRelationRepository implements ReviewRelationRepository {
     private readonly neo4j: Neo4jService
   ) {}
 
-  async createReviewRelation(userId: string, movieId: string, rating: number): Promise<void> {
+  async createReviewRelation(userId: string, movieId: string, rating: number, reviewId: string): Promise<void> {
     await this.neo4j.write(
       `
       MERGE (u:User {id: $userId})
       MERGE (m:Movie {id: $movieId})
       MERGE (u)-[r:REVIEWED]->(m)
-      SET r.rating = $rating
+      SET r.rating = $rating, r.reviewId = $reviewId
       `,
-      { userId, movieId, rating }
+      { userId, movieId, rating, reviewId }
     );
   }
 
-  async deleteReviewRelation(userId: string, movieId: string): Promise<void> {
+  async deleteReviewRelation(userId: string, reviewId: string): Promise<void> {
     await this.neo4j.write(
       `
-      MATCH (u:User {id: $userId})-[r:REVIEWED]->(m:Movie {id: $movieId})
-      DELETE r
-      `,
-      { userId, movieId }
+    MATCH (u:User {id: $userId})-[r:REVIEWED]->(m:Movie)
+    WHERE r.reviewId = $reviewId
+    DELETE r
+    `,
+      { userId, reviewId }
     );
+    console.log(userId, reviewId)
   }
 }

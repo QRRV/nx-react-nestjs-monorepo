@@ -9,6 +9,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { UpdateReviewHandler } from './application/handlers/updateReviewHandler';
 import { DeleteReviewHandler } from './application/handlers/deleteReviewHandler';
 import { GetReviewsByUserHandler } from './application/handlers/getReviewsByUserHandler';
+import { HttpReviewGraphWriteRepository } from './infrastructure/neo4j/repositories/httpReviewGraphWriteRepository';
 
 const commandHandlers = [
   CreateReviewHandler,
@@ -37,6 +38,10 @@ const queryHandlers = [
     {
       provide: 'ReviewQueryRepository',
       useClass: MongooseReviewQueryRepository,
+    },
+    {
+      provide: 'ReviewGraphWriteRepository',
+      useClass: HttpReviewGraphWriteRepository,
     },
   ],
   exports: [...commandHandlers, ...queryHandlers],

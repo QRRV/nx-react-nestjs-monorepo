@@ -16,7 +16,7 @@ export class CreateMovieListItemRelationController {
     @Req() req: any
   ) {
     const userId = req.user.id;
-    const command = new CreateMovieListItemRelationCommand(userId, body.movieId);
+    const command = new CreateMovieListItemRelationCommand(userId, body.movieId, body.itemId);
     await this.commandBus.execute(command);
   }
 }

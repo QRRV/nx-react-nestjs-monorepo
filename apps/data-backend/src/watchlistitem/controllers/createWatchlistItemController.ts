@@ -20,10 +20,12 @@ export class CreateWatchlistItemController {
   @Post()
   async create(@Body() dto: createWatchlistItemDto, @Req() req: any) {
     const userId = req.user.id;
+    const token = req.headers.authorization.split(' ')[1];
 
     const command = new CreateWatchlistItemCommand(
       userId,
       dto.movieId,
+      token,
       dto.priority
     );
 

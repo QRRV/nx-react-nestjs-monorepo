@@ -30,6 +30,13 @@ describe('DeleteReviewHandler Integration', () => {
         {
           provide: 'ReviewCommandRepository',
           useClass: MongooseReviewCommandRepository
+        },
+        {
+          provide: 'ReviewGraphWriteRepository',
+          useValue: {
+            deleteReviewRelation: jest.fn(),
+            createReviewRelation: jest.fn()
+          }
         }
       ]
     }).compile()
@@ -54,14 +61,14 @@ describe('DeleteReviewHandler Integration', () => {
       reviewDate: new Date()
     })
 
-    await handler.execute(new DeleteReviewCommand('uuid-13', 'userZ'))
+    await handler.execute(new DeleteReviewCommand('uuid-13', 'userZ', 'token'))
 
     const deleted = await reviewModel.findOne({ _id: 'uuid-13' })
     expect(deleted).toBeNull()
   })
 
   it('should throw NotFoundException when trying to delete non-existent review', async () => {
-    const command = new DeleteReviewCommand('niet-bestaand-id', 'userX')
+    const command = new DeleteReviewCommand('niet-bestaand-id', 'userX', 'token')
 
     await expect(handler.execute(command)).rejects.toThrow('Review not found')
   })
@@ -76,9 +83,8 @@ describe('DeleteReviewHandler Integration', () => {
       reviewDate: new Date()
     })
 
-    const command = new DeleteReviewCommand('uuid-15', 'fouteUser')
+    const command = new DeleteReviewCommand('uuid-15', 'fouteUser', 'token')
 
     await expect(handler.execute(command)).rejects.toThrow()
   })
-
 })

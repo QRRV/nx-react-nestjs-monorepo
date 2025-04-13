@@ -8,24 +8,26 @@ export class Neo4jMovieListItemRelationRepository implements MovieListItemRelati
     private readonly neo4j: Neo4jService
   ) {}
 
-  async createMovieListItemRelation(userId: string, movieId: string): Promise<void> {
+  async createMovieListItemRelation(userId: string, movieId: string, itemId: string): Promise<void> {
     await this.neo4j.write(
       `
       MERGE (u:User {id: $userId})
       MERGE (m:Movie {id: $movieId})
-      MERGE (u)-[:ADDED_TO_LIST]->(m)
+      MERGE (u)-[r:ADDED_TO_LIST]->(m)
+      SET r.itemId = $itemId
       `,
-      { userId, movieId }
+      { userId, movieId, itemId }
     );
   }
 
-  async deleteMovieListItemRelation(userId: string, movieId: string): Promise<void> {
+  async deleteMovieListItemRelation(userId: string, itemId: string): Promise<void> {
     await this.neo4j.write(
       `
-      MATCH (u:User {id: $userId})-[r:ADDED_TO_LIST]->(m:Movie {id: $movieId})
-      DELETE r
-      `,
-      { userId, movieId }
+    MATCH (u:User {id: $userId})-[r:ADDED_TO_LIST]->(m:Movie)
+    WHERE r.itemId = $itemId
+    DELETE r
+    `,
+      { userId, itemId }
     );
   }
 }

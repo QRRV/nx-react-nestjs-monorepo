@@ -33,7 +33,7 @@ export class Neo4jRecommendationRepository implements RecommendationRepository {
     return result.records.map((row) => ({
       movieId: row.get('movieId'),
       avgRating: row.get('avgRating'),
-      numFriendsRated: row.get('numFriendsRated'),
+      numFriendsRated: (row.get('numFriendsRated') as any).toNumber?.() ?? 0,
     }));
   }
 }

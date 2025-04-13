@@ -13,6 +13,6 @@ export class DeleteMovieListItemRelationHandler
   ) {}
 
   async execute(command: DeleteMovieListItemRelationCommand): Promise<void> {
-    await this.repo.deleteMovieListItemRelation(command.userId, command.movieId);
+    await this.repo.deleteMovieListItemRelation(command.userId, command.itemId);
   }
 }

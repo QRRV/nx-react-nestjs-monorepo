@@ -13,6 +13,6 @@ export class CreateReviewRelationHandler
   ) {}
 
   async execute(command: CreateReviewRelationCommand): Promise<void> {
-    await this.repo.createReviewRelation(command.userId, command.movieId, command.rating);
+    await this.repo.createReviewRelation(command.userId, command.movieId, command.rating, command.reviewId);
   }
 }

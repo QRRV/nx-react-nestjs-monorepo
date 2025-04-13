@@ -17,6 +17,7 @@ export class DeleteReviewController {
   @Delete(':id')
   async delete(@Param('id') id: string, @Req() req: any) {
     const userId = req.user.id;
-    return this.commandBus.execute(new DeleteReviewCommand(id, userId));
+    const token = req.headers.authorization.split(' ')[1];
+    return this.commandBus.execute(new DeleteReviewCommand(id, userId, token));
   }
 }

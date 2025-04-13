@@ -4,6 +4,7 @@ import { ReviewCommandRepository } from '../../domain/ports/reviewCommandReposit
 import { Inject, Injectable } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { randomUUID } from 'crypto';
+import { ReviewGraphWriteRepository } from '../../domain/ports/reviewGraphWriteRepository';
 
 @Injectable()
 @CommandHandler(CreateReviewCommand)
@@ -11,7 +12,9 @@ export class CreateReviewHandler implements ICommandHandler<CreateReviewCommand>
 
   constructor(
     @Inject('ReviewCommandRepository')
-    private readonly repo: ReviewCommandRepository
+    private readonly repo: ReviewCommandRepository,
+    @Inject('ReviewGraphWriteRepository')
+    private readonly graphRepo: ReviewGraphWriteRepository
   ) {}
 
   async execute(command: CreateReviewCommand): Promise<Review> {
@@ -23,7 +26,10 @@ export class CreateReviewHandler implements ICommandHandler<CreateReviewCommand>
       command.comment ?? '',
       command.reviewDate
     );
+    const created = await this.repo.create(review);
 
-    return this.repo.create(review);
+    await this.graphRepo.createReviewRelation(command.movieId, command.rating, created._id, command.token);
+
+    return created;
   }
 }

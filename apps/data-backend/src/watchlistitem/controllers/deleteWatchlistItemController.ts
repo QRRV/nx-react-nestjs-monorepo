@@ -17,7 +17,9 @@ export class DeleteWatchlistItemController {
   @Delete(':id')
   async delete(@Param('id') id: string, @Req() req: any) {
     const userId = req.user.id;
-    const command = new DeleteWatchlistItemCommand(id, userId);
+    const token = req.headers.authorization.split(' ')[1];
+
+    const command = new DeleteWatchlistItemCommand(id, userId, token);
     return this.commandBus.execute(command);
   }
 }

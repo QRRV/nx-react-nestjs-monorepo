@@ -4,11 +4,14 @@ import { Inject } from '@nestjs/common'
 import { WatchlistItem } from '../../domain/entities/watchlistItem'
 import { randomUUID } from 'crypto'
 import { WatchlistItemCommandRepository } from '../../domain/ports/watchlistItemCommandRepository';
+import { WatchlistGraphCommandRepository } from '../../domain/ports/watchlistItemGraphCommandRepository';
 @CommandHandler(CreateWatchlistItemCommand)
 export class CreateWatchlistItemHandler implements ICommandHandler<CreateWatchlistItemCommand> {
   constructor(
     @Inject('WatchlistItemCommandRepository')
-    private readonly repo: WatchlistItemCommandRepository
+    private readonly repo: WatchlistItemCommandRepository,
+    @Inject('WatchlistGraphCommandRepository')
+    private readonly graphRepo: WatchlistGraphCommandRepository
   ) {}
 
   async execute(command: CreateWatchlistItemCommand): Promise<WatchlistItem> {
@@ -21,6 +24,14 @@ export class CreateWatchlistItemHandler implements ICommandHandler<CreateWatchli
       command.priority ?? 3
     )
 
-    return this.repo.create(item)
+    const created = await this.repo.create(item);
+
+    await this.graphRepo.createMovieListItemRelation(
+      item.movieId,
+      item.id,
+      command.token
+    );
+
+    return created;
   }
 }

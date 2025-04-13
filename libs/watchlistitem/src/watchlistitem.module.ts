@@ -12,6 +12,9 @@ import {
 } from './infrastructure/mongoose/repositories/mongooseWatchlistItemQueryRepository';
 import { UpdateWatchlistItemHandler } from './application/handlers/updateWatchlistItemHandler';
 import { DeleteWatchlistItemHandler } from './application/handlers/deleteWatchlistItemHandler';
+import {
+  HttpWatchlistGraphCommandRepository
+} from './infrastructure/neo4j/repositories/httpWatchlistGraphCommandRepository';
 
 const commandHandlers = [
   CreateWatchlistItemHandler,
@@ -34,6 +37,10 @@ const queryHandlers = [GetWatchlistByUserHandler]
     {
       provide: 'WatchlistItemQueryRepository',
       useClass: MongooseWatchlistItemQueryRepository
+    },
+    {
+      provide: 'WatchlistGraphCommandRepository',
+      useClass: HttpWatchlistGraphCommandRepository
     }
   ],
   exports: [

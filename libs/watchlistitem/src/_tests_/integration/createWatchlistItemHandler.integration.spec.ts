@@ -30,9 +30,17 @@ describe('CreateWatchlistItemHandler Integration', () => {
         {
           provide: 'WatchlistItemCommandRepository',
           useClass: MongooseWatchlistItemCommandRepository
+        },
+        {
+          provide: 'WatchlistGraphCommandRepository',
+          useValue: {
+            createMovieListItemRelation: jest.fn(),
+            deleteMovieListItemRelation: jest.fn()
+          }
         }
       ]
     }).compile()
+
 
     handler = module.get(CreateWatchlistItemHandler)
     model = module.get(getModelToken('watchlistitems'))
@@ -45,7 +53,7 @@ describe('CreateWatchlistItemHandler Integration', () => {
   })
 
   it('should save a watchlist item to the database', async () => {
-    const command = new CreateWatchlistItemCommand('user123', 'tt1375666', 2)
+    const command = new CreateWatchlistItemCommand('user123', 'tt1375666', 'token', 2)
 
     const result = await handler.execute(command)
 

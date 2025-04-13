@@ -8,13 +8,13 @@ export class DeleteReviewRelationController {
   constructor(private readonly commandBus: CommandBus) {}
 
   @UseGuards(JwtAuthGuard)
-  @Delete(':movieId')
+  @Delete(':reviewId')
   async delete(
-    @Param('movieId') movieId: string,
+    @Param('reviewId') reviewId: string,
     @Req() req: any
   ) {
     const userId = req.user.id;
-    const command = new DeleteReviewRelationCommand(userId, movieId);
+    const command = new DeleteReviewRelationCommand(userId, reviewId);
     await this.commandBus.execute(command);
   }
 }

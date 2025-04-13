@@ -13,6 +13,6 @@ export class CreateMovieListItemRelationHandler
   ) {}
 
   async execute(command: CreateMovieListItemRelationCommand): Promise<void> {
-    await this.repo.createMovieListItemRelation(command.userId, command.movieId);
+    await this.repo.createMovieListItemRelation(command.userId, command.movieId, command.itemId);
   }
 }

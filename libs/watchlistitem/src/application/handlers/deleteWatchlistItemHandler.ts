@@ -2,12 +2,15 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { DeleteWatchlistItemCommand } from '../commands/deleteWatchlistItemCommand'
 import { Inject, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { WatchlistItemCommandRepository } from '../../domain/ports/watchlistItemCommandRepository'
+import { WatchlistGraphCommandRepository } from '../../domain/ports/watchlistItemGraphCommandRepository';
 
 @CommandHandler(DeleteWatchlistItemCommand)
 export class DeleteWatchlistItemHandler implements ICommandHandler<DeleteWatchlistItemCommand> {
   constructor(
     @Inject('WatchlistItemCommandRepository')
-    private readonly repo: WatchlistItemCommandRepository
+    private readonly repo: WatchlistItemCommandRepository,
+    @Inject('WatchlistGraphCommandRepository')
+    private readonly graphRepo: WatchlistGraphCommandRepository
   ) {}
 
   async execute(command: DeleteWatchlistItemCommand): Promise<void> {
@@ -20,6 +23,8 @@ export class DeleteWatchlistItemHandler implements ICommandHandler<DeleteWatchli
     if (result === 'unauthorized') {
       throw new UnauthorizedException('Not allowed to delete this watchlist item')
     }
+
+    await this.graphRepo.deleteMovieListItemRelation(command.itemId, command.token)
 
   }
 }

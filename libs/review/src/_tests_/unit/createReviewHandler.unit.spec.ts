@@ -2,10 +2,12 @@ import { CreateReviewHandler } from '../../application/handlers/createReviewHand
 import { ReviewCommandRepository } from '../../domain/ports/reviewCommandRepository'
 import { Review } from '../../domain/entities/review'
 import { CreateReviewCommand } from '../../application/commands/createReviewCommand'
+import { ReviewGraphWriteRepository } from '../../domain/ports/reviewGraphWriteRepository';
 
 describe('CreateReviewHandler', () => {
   let handler: CreateReviewHandler
   let mockRepo: ReviewCommandRepository
+  let mockGraphRepo: ReviewGraphWriteRepository
 
   beforeEach(() => {
     mockRepo = {
@@ -14,7 +16,12 @@ describe('CreateReviewHandler', () => {
       update: jest.fn()
     }
 
-    handler = new CreateReviewHandler(mockRepo)
+    mockGraphRepo = {
+      createReviewRelation: jest.fn(),
+      deleteReviewRelation: jest.fn(),
+    }
+
+    handler = new CreateReviewHandler(mockRepo, mockGraphRepo)
   })
 
   it('should create a review and return it', async () => {
@@ -22,6 +29,7 @@ describe('CreateReviewHandler', () => {
       'user123',
       'movie456',
       5.5,
+      'token123',
       'Geweldige film'
     )
 
@@ -40,7 +48,8 @@ describe('CreateReviewHandler', () => {
     const command = new CreateReviewCommand(
       'user123',
       'movie456',
-      4
+      4,
+      'token123'
     )
 
     const result = await handler.execute(command)

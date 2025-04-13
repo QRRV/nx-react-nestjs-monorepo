@@ -16,7 +16,7 @@ export class CreateReviewRelationController {
     @Req() req: any
   ) {
     const userId = req.user.id;
-    const command = new CreateReviewRelationCommand(userId, body.movieId, body.rating);
+    const command = new CreateReviewRelationCommand(userId, body.movieId, body.rating, body.reviewId);
     await this.commandBus.execute(command);
   }
 }

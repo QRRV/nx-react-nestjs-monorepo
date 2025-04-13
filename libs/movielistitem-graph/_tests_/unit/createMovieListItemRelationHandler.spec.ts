@@ -10,10 +10,10 @@ describe('CreateMovieListItemRelationHandler', () => {
     };
 
     const handler = new CreateMovieListItemRelationHandler(repo);
-    const command = new CreateMovieListItemRelationCommand('user-1', 'movie-1');
+    const command = new CreateMovieListItemRelationCommand('user-1', 'movie-1', 'item-1');
 
     await handler.execute(command);
 
-    expect(repo.createMovieListItemRelation).toHaveBeenCalledWith('user-1', 'movie-1');
+    expect(repo.createMovieListItemRelation).toHaveBeenCalledWith('user-1', 'movie-1', 'item-1');
   });
 });

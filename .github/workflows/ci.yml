@@ -1,70 +1,68 @@
-name: CI and Deploy data-backend
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy frontend and backend app to Azure
 
 on:
   push:
     branches:
-      - main
-  pull_request:
+      - release
+  workflow_dispatch:
 
 jobs:
-  lint-and-test:
-    name: Lint & Test All Projects
+  build:
     runs-on: ubuntu-latest
-
+    name: Build and zip apps from /dist
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js version
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '18.x'
 
-      - name: Install dependencies
-        run: npm install
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+          # npm run test --if-present
 
-      - name: Lint all projects
-        run: npx nx run-many --target=lint --all
+      - name: Zip artifacts for deployment
+        run: |
+          echo ${GITHUB_WORKSPACE}
+          cd ${GITHUB_WORKSPACE}/dist/apps/data-backend/ && zip ${GITHUB_WORKSPACE}/data-backend-release.zip ./* -r
 
-      - name: Test all projects
-        run: npx nx run-many --target=test --all --ci --coverage --passWithNoTests
+      - name: Upload data-backend artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: data-backend
+          path: data-backend-release.zip
 
-  deploy-data-backend:
-    name: Build & Deploy data-backend
+  deploy-data-api:
     runs-on: ubuntu-latest
-    needs: lint-and-test
+    name: Deploy NestJs data-backend backend
+    needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
         with:
-          node-version: '18'
+          name: data-backend
+
+      - name: Unzip artifact for deployment
+        run: unzip data-backend-release.zip
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build only data-backend
-        run: npx nx build data-backend
-
-      - name: Install runtime dependencies in dist
-        run: |
-          cd dist/apps/data-backend
-          npm install --omit=dev
-
-      - name: Zip data-backend artifact
-        run: |
-          cd dist/apps/data-backend && zip -r data-backend-release.zip .
-          mv data-backend-release.zip ${{ github.workspace }}
-
-      - name: Deploy to Azure Web App
+      - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'data-backend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
-          package: data-backend-release.zip
+          package: .

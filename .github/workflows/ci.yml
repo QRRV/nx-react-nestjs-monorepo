@@ -3,7 +3,7 @@ name: CI and Deploy data-backend
 on:
   push:
     branches:
-      - release
+      - main
   pull_request:
 
 jobs:

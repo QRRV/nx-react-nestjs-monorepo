@@ -1,6 +1,7 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { TransformInterceptor } from '@moviebuddy/shared';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,7 +13,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
-
+  app.useGlobalInterceptors(new TransformInterceptor());
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
 

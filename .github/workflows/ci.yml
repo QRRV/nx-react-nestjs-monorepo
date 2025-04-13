@@ -22,22 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Lint all libs
-        run: |
-          npx nx lint auth
-          npx nx lint movie
-          npx nx lint movielistitem-graph
-          npx nx lint review
-          npx nx lint review-graph
-          npx nx lint user
-          npx nx lint watchlistitem
+      - name: Lint all projects
+        run: npx nx run-many --target=lint --all
 
-      - name: Test all libs
-        run: |
-          npx nx test auth --ci --coverage
-          npx nx test movie --ci --coverage
-          npx nx test movielistitem-graph --ci --coverage
-          npx nx test review --ci --coverage
-          npx nx test review-graph --ci --coverage
-          npx nx test user --ci --coverage
-          npx nx test watchlistitem --ci --coverage
+      - name: Test all projects
+        run: npx nx run-many --target=test --all --ci --coverage --passWithNoTests

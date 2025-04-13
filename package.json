@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "lint": "npx nx lint auth && npx nx lint movie && npx nx lint movielistitem-graph && npx nx lint review && npx nx lint review-graph && npx nx lint user && npx nx lint watchlistitem",
-    "test": "npx nx test auth --ci && npx nx test movie --ci && npx nx test movielistitem-graph --ci && npx nx test review --ci && npx nx test review-graph --ci && npx nx test user --ci && npx nx test watchlistitem --ci"
+    "lint": "npx nx run-many --target=lint --all",
+    "test": "npx nx run-many --target=test --all --ci --passWithNoTests"
   },
   "private": true,
   "dependencies": {

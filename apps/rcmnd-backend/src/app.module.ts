@@ -12,6 +12,13 @@ import { MovieListItemGraphModule } from '@moviebuddy/movielistitem-graph';
 import {
   DeleteMovieListItemRelationController
 } from './movielistitem/controllers/deleteMovieListItemRelationController';
+import { GetRecommendationsController } from './recommendation/controllers/getRecommendationsController';
+import { RecommendationGraphModule } from '@moviebuddy/recommendation-graph';
+import { AddFriendController } from './user/controllers/addFriendController';
+import { GetFriendsController } from './user/controllers/getFriendsController';
+import { RemoveFriendController } from './user/controllers/removeFriendController';
+import { SharedModule } from '@moviebuddy/shared';
+import { UserGraphModule } from '@moviebuddy/user-graph';
 
 const reviewControllers = [
   CreateReviewRelationController,
@@ -23,12 +30,25 @@ const movieListItemControllers = [
   DeleteMovieListItemRelationController,
 ];
 
+const recommendationControllers = [
+  GetRecommendationsController,
+];
+
+const userGraphControllers = [
+  AddFriendController,
+  GetFriendsController,
+  RemoveFriendController,
+];
+
 @Module({
   imports: [
     CqrsModule,
     ReviewGraphModule,
     MovieListItemGraphModule,
     AuthSupportModule,
+    RecommendationGraphModule,
+    SharedModule,
+    UserGraphModule,
     Neo4jModule.forRoot({
       scheme: process.env.NEO4J_SCHEME as Neo4jScheme || 'neo4j',
       host: process.env.NEO4J_HOST || 'localhost',
@@ -40,6 +60,8 @@ const movieListItemControllers = [
   controllers: [
     ...reviewControllers,
     ...movieListItemControllers,
+    ...recommendationControllers,
+    ...userGraphControllers,
   ],
 })
 export class AppModule {}

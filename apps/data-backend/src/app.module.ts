@@ -23,6 +23,7 @@ import { RegisterController } from './auth/controllers/registerController';
 import { LoginController } from './auth/controllers/loginController';
 import { AuthModule } from '@moviebuddy/auth';
 import * as process from 'node:process';
+import { SharedModule } from '@moviebuddy/shared';
 
 
 const reviewControllers = [
@@ -65,6 +66,7 @@ const authControllers = [
     WatchlistitemModule,
     UserModule,
     AuthModule,
+    SharedModule
   ],
   controllers: [
     ...reviewControllers,

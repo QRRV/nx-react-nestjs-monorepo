@@ -17,7 +17,7 @@ async function bootstrap() {
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
 
-  const port = process.env.PORT || 3001;
+  const port = process.env.RCMND_PORT || 3001;
   app.enableCors({
     origin: '*',
   });

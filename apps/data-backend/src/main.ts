@@ -20,7 +20,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor());
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3000;
+  const port = process.env.BACKEND_PORT || 3000;
   app.enableCors({
     origin: '*',
   });

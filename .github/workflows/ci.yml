@@ -35,6 +35,8 @@ jobs:
           NEO4J_USERNAME=${{ secrets.NEO4J_USERNAME }}
           NEO4J_PASSWORD=${{ secrets.NEO4J_PASSWORD }}
           RCMND_API_URL=${{ secrets.RCMND_API_URL }}
+          RCMND_PORT=${{ secrets.RCMND_PORT }}
+          BACKEND_PORT=${{ secrets.BACKEND_PORT }}
           EOF
 
       - name: Install runtime dependencies in dist

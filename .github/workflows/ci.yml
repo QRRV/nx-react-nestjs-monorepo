@@ -54,7 +54,7 @@ jobs:
 
   deploy-nx-react-nestjs:
     runs-on: ubuntu-latest
-    name: Deploy Angular Frontend
+    name: Deploy React Frontend
     needs: build
     environment:
       name: 'Production'

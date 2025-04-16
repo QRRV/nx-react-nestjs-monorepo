@@ -30,9 +30,12 @@ jobs:
 
       - name: Zip artifacts for deployment
         run: |
-          cd dist/apps/data-backend/ && zip ../../../data-backend-release.zip ./* -r
-          cd ../../rcmnd-backend/ && zip ../../../rcmnd-backend-release.zip ./* -r
-          cd ../../nx-react-nestjs/ && zip ../../../nx-react-nestjs-release.zip ./* -r
+          echo "Zipping artifacts from ${GITHUB_WORKSPACE}/dist/apps/"
+          cd ${GITHUB_WORKSPACE}/dist/apps/data-backend/ && zip ${GITHUB_WORKSPACE}/data-backend-release.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/dist/apps/rcmnd-backend/ && zip ${GITHUB_WORKSPACE}/rcmnd-backend-release.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/dist/apps/nx-react-nestjs/ && zip ${GITHUB_WORKSPACE}/nx-react-nestjs-release.zip ./* -r
+
+      # Rest of the upload steps remain the same...
 
       - name: Upload nx-react-nestjs artifact
         uses: actions/upload-artifact@v4

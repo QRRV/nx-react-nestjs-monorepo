@@ -7,11 +7,12 @@ interface WatchListProps {
   onEditClick?: (itemId: string) => void;
   onRemoveClick?: (itemId: string) => void;
   onGoToMovieClick?: (movieId: string) => void;
+  onClick?: (itemId: string) => void;
 }
 
 
 
-const WatchList = ({ items, onEditClick, onRemoveClick, onGoToMovieClick }: WatchListProps) => {
+const WatchList = ({ items, onEditClick, onRemoveClick, onGoToMovieClick, onClick }: WatchListProps) => {
   const sortedItems = [...items].sort((a, b) => a.priority - b.priority);
 
   return (
@@ -23,6 +24,7 @@ const WatchList = ({ items, onEditClick, onRemoveClick, onGoToMovieClick }: Watc
           onEditClick={onEditClick}
           onRemoveClick={onRemoveClick}
           onGoToMovieClick={onGoToMovieClick}
+          onClick={onClick}
         />
       ))}
     </div>

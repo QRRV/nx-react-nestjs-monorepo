@@ -36,7 +36,6 @@ const WatchListDetailPage = () => {
 
         const rawItems: WatchListItem[] = response.data;
 
-        // Enrich with movie title
         const uniqueMovieIds = [
           ...new Set(rawItems.map((item) => item.movieId)),
         ];
@@ -120,6 +119,10 @@ const WatchListDetailPage = () => {
     navigate(`/movie/${movieId}`);
   };
 
+  const handleOnCardClick = (itemId: string) => {
+    navigate(`/users/${userId}/watchlist/${itemId}`);
+  }
+
   if (error) {
     return <p style={{ color: 'red' }}>{error}</p>;
   }
@@ -143,6 +146,7 @@ const WatchListDetailPage = () => {
         onEditClick={canEdit ? handleEditClick : undefined}
         onRemoveClick={canEdit ? handleRemoveClick : undefined}
         onGoToMovieClick={handleGoToMovie}
+        onClick={handleOnCardClick}
       />
     </div>
   );

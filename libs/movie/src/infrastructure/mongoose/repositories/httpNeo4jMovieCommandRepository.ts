@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export class HttpNeo4jMovieCommandRepository implements MovieGraphCommandRepository {
 
-  private readonly baseUrl = process.env['RCMND_API_URL'];
+  private readonly baseUrl = 'https://rcmnd-backend-eac4fgeycmf2gdee.westeurope-01.azurewebsites.net';
 
   async createMovie(id: string, title: string, genres: string[], token: string): Promise<void> {
     await axios.post(

@@ -4,7 +4,7 @@ import { WatchlistGraphCommandRepository } from '../../../domain/ports/watchlist
 
 
 export class HttpWatchlistGraphCommandRepository implements WatchlistGraphCommandRepository {
-  private readonly baseUrl = process.env['RCMND_API_URL'];
+  private readonly baseUrl = 'https://rcmnd-backend-eac4fgeycmf2gdee.westeurope-01.azurewebsites.net';
 
   async createMovieListItemRelation(
     movieId: string,

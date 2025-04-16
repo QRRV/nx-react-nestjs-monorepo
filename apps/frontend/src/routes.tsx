@@ -1,10 +1,10 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 
 import LandingPage from './components/pages/landingPage/LandingPage';
-import AboutPage from './components/pages/AboutPage';
+import AboutPage from './components/pages/AboutPage/AboutPage';
 import RegisterPage from './components/pages/RegisterPage/RegisterPage';
 import LoginPage from './components/pages/LoginPage/LoginPage';
-import { getUserId, isAdmin, isLoggedIn } from './utils/auth';
+import { isAdmin, isLoggedIn } from './utils/auth';
 import MovieDetailPage from './components/pages/movieDetailPage/MovieDetailPage';
 import AdminPage from './components/pages/AdminPage/AdminPage';
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
@@ -19,6 +19,7 @@ import WatchListDetailPage from './components/pages/WatchListDetailPage/WatchLis
 import WatchListItemCreatePage from './components/pages/WatchListItemCreatePage/WatchListItemCreatePage';
 import WatchListItemEditPage from './components/pages/WatchListItemEditPage/WatchListItemEditPage';
 import FriendsPage from './components/pages/FriendsPage/FriendsPage';
+import WatchListItemDetailPage from './components/pages/WatchListItemDetailPage/WatchListItemDetailPage';
 export type AppRoute = RouteObject & {
   path: string;
   element: JSX.Element;
@@ -42,6 +43,7 @@ export enum RoutePath {
   WATCHLIST_CREATE = '/users/:userId/watchlist/create',
   WATCHLIST_CREATE_FOR_MOVIE = '/users/:userId/watchlist/create/:movieId',
   WATCHLIST_EDIT = '/users/:userId/watchlist/:itemId/edit',
+  WATCHLIST_ITEM = '/users/:userId/watchlist/:itemId',
   FRIENDS = '/users/:userId/friends',
 }
 
@@ -159,6 +161,14 @@ export const routes: AppRoute[] = [
     element: (
       <PrivateRoute>
         <WatchListItemEditPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: RoutePath.WATCHLIST_ITEM,
+    element: (
+      <PrivateRoute>
+        <WatchListItemDetailPage />
       </PrivateRoute>
     ),
   },

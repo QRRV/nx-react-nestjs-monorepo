@@ -1,0 +1,53 @@
+.requirementsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.header {
+  background-color: #f5f5f5;
+}
+
+.column {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  vertical-align: top;
+  text-align: left;
+}
+
+.column:first-child {
+  width: 30%;
+}
+
+.column:nth-child(2) {
+  width: 50%;
+}
+
+.column:last-child {
+  width: 20%;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.aboutMovieBuddyWrapper {
+  padding: 2rem;
+}
+
+
+.erdImage {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
+

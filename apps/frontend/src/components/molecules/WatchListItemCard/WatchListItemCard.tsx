@@ -11,11 +11,15 @@ interface WatchListItemCardProps {
   onEditClick?: (itemId: string) => void;
   onRemoveClick?: (itemId: string) => void;
   onGoToMovieClick?: (movieId: string) => void;
+  onClick?: (itemId: string) => void;
 }
 
-const WatchListItemCard = ({ item, onEditClick, onRemoveClick, onGoToMovieClick }: WatchListItemCardProps) => {
+const WatchListItemCard = ({ item, onEditClick, onRemoveClick, onGoToMovieClick, onClick }: WatchListItemCardProps) => {
   return (
-    <div className={style.card}>
+    <div className={style.card} onClick={(e) => {
+      e.stopPropagation();
+      onClick?.(item.id);
+    }}>
       <div className={style.header}>
         <Text fontWeight={FontWeight.Bold} fontSize={FontSize.LARGE}>
           {item.movieTitle || `Priority ${item.priority}`}

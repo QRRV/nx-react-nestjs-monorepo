@@ -12,6 +12,8 @@ import { MongooseMovieCommandRepository } from './infrastructure/mongoose/reposi
 import {
   HttpNeo4jMovieCommandRepository
 } from './infrastructure/mongoose/repositories/httpNeo4jMovieCommandRepository';
+import { WatchlistitemModule } from '@moviebuddy/watchlistitem';
+import { ReviewModule } from '@moviebuddy/review';
 
 const queryHandlers = [
   GetMoviesHandler,
@@ -27,6 +29,8 @@ const commandHandlers = [
 @Module({
   imports: [
     CqrsModule,
+    WatchlistitemModule,
+    ReviewModule,
     MongooseModule.forFeature([
       { name: 'movies', schema: MovieSchema }
     ])

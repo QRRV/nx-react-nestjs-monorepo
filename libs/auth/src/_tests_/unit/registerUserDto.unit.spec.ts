@@ -8,6 +8,7 @@ describe('RegisterUserDto', () => {
     dto.email = 'quinn@example.com';
     dto.password = 'SterkW8woord!';
     dto.bio = 'Filmfan';
+    dto.role = 'user'
 
     const errors = await validate(dto);
     expect(errors.length).toBe(0);
@@ -19,6 +20,7 @@ describe('RegisterUserDto', () => {
     dto.email = 'not-an-email';
     dto.password = 'SterkW8woord!';
     dto.bio = 'Filmfan';
+    dto.role = 'user'
 
     const errors = await validate(dto);
     expect(errors.length).toBeGreaterThan(0);

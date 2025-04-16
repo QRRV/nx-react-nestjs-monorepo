@@ -4,11 +4,18 @@ import { UserCommandRepository } from '../../../domain/ports/userCommandReposito
 import { User } from '../../../domain/entities/user';
 import { UserModel } from '../schemas/userSchema';
 import { NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { WatchlistItemModel } from '@moviebuddy/watchlistitem';
+import { ReviewModel } from '@moviebuddy/review';
 
 export class MongooseUserCommandRepository implements UserCommandRepository {
   constructor(
     @InjectModel('users')
     private readonly model: Model<UserModel>,
+    @InjectModel('watchlistitems')
+    private readonly watchlistModel: Model<WatchlistItemModel>,
+    @InjectModel('reviews')
+    private readonly reviewModel: Model<ReviewModel>,
+
   ) {}
 
   async update(
@@ -45,6 +52,10 @@ export class MongooseUserCommandRepository implements UserCommandRepository {
     if (found.id !== requestingUserId) {
       throw new UnauthorizedException('Unauthorized to delete this user');
     }
+
+    await this.reviewModel.deleteMany({ userId }).exec();
+
+    await this.watchlistModel.deleteMany({ userId }).exec();
 
     const result = await this.model.deleteOne({ _id: userId }).exec();
     return result.deletedCount > 0;

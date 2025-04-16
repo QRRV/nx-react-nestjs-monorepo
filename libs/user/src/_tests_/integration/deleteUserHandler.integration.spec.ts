@@ -3,15 +3,16 @@ import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose, { Model } from 'mongoose';
 import { DeleteUserHandler } from '../../application/handlers/deleteUserHandler';
-import { UserSchema } from '../../infrastructure/mongoose/schemas/userSchema';
+import { UserSchema, UserModel } from '../../infrastructure/mongoose/schemas/userSchema';
 import { MongooseUserCommandRepository } from '../../infrastructure/mongoose/repositories/mongooseUserCommandRepository';
-import { User } from '../../domain/entities/user';
+import { WatchlistItemSchema } from '@moviebuddy/watchlistitem';
+import { ReviewSchema } from '@moviebuddy/review';
 
 describe('DeleteUserHandler Integration', () => {
   jest.setTimeout(20000);
 
   let handler: DeleteUserHandler;
-  let userModel: Model<User>;
+  let userModel: Model<UserModel>;
   let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {
@@ -21,7 +22,11 @@ describe('DeleteUserHandler Integration', () => {
     const moduleRef = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(uri),
-        MongooseModule.forFeature([{ name: 'users', schema: UserSchema }]),
+        MongooseModule.forFeature([
+          { name: 'users', schema: UserSchema },
+          { name: 'watchlistitems', schema: WatchlistItemSchema },
+          { name: 'reviews', schema: ReviewSchema },
+        ]),
       ],
       providers: [
         DeleteUserHandler,
@@ -33,7 +38,7 @@ describe('DeleteUserHandler Integration', () => {
     }).compile();
 
     handler = moduleRef.get(DeleteUserHandler);
-    userModel = moduleRef.get(getModelToken('users'));
+    userModel = moduleRef.get<Model<UserModel>>(getModelToken('users'));
   });
 
   afterAll(async () => {
@@ -52,7 +57,9 @@ describe('DeleteUserHandler Integration', () => {
       email: 'quinn@example.com',
       password: 'hashedPass',
       bio: 'Filmfan',
+      role: 'user'
     });
+
     const command = {
       targetUserId: 'user-id-123',
       requestingUserId: 'user-id-123',
@@ -80,7 +87,9 @@ describe('DeleteUserHandler Integration', () => {
       email: 'quinn@example.com',
       password: 'hashedPass',
       bio: 'Filmfan',
+      role: 'user'
     });
+
     const command = {
       targetUserId: 'user-id-123',
       requestingUserId: 'wrong-user-id',

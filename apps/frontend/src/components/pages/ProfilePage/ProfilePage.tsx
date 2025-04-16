@@ -37,7 +37,7 @@ const ProfilePage = () => {
         const [userRes, reviewsRes, friendsRes] = await Promise.all([
           apiRequest(`/users/${id}`, { method: 'GET', authToken: token }),
           apiRequest(`/users/${id}/reviews`, { method: 'GET', authToken: token }),
-          apiRequest('/users/friends', { method: 'GET', authToken: token }, true),
+          apiRequest(`/users/${getUserId()}/friends`, { method: 'GET', authToken: token }, true),
         ]);
 
         setUser(userRes.data);
@@ -180,7 +180,9 @@ const ProfilePage = () => {
 
         <div className={style.buttonGroup}>
           <Button onClick={goToWatchlist}>View Watchlist</Button>
+          <Button onClick={() => navigate(`/users/${id}/friends`)}>View friends list</Button>
         </div>
+
       </div>
 
       <div className={style.section}>

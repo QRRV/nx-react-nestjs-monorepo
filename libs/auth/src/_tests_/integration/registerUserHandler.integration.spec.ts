@@ -59,7 +59,8 @@ describe('RegisterUserHandler Integration', () => {
       'quinn',
       'quinn@example.com',
       'SterkW8woord!',
-      'Filmfan'
+      'Filmfan',
+      'user'
     );
 
     const result = await handler.execute(command);
@@ -84,13 +85,15 @@ describe('RegisterUserHandler Integration', () => {
       email: 'quinn@example.com',
       password: 'hashedPass',
       bio: 'Filmfan',
+      role: 'user'
     });
 
     const command = new RegisterUserCommand(
       'quinn',
       'quinn@example.com',
       'SterkW8woord!',
-      'Filmfan'
+      'Filmfan',
+      'user'
     );
 
     await expect(handler.execute(command)).rejects.toThrow('Email address already in use');

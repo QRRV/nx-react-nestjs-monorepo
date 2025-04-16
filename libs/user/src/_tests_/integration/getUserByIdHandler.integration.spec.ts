@@ -3,15 +3,14 @@ import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose, { Model } from 'mongoose';
 import { GetUserByIdHandler } from '../../application/handlers/getUserByIdHandler';
-import { UserSchema } from '../../infrastructure/mongoose/schemas/userSchema';
+import { UserSchema, UserModel } from '../../infrastructure/mongoose/schemas/userSchema';
 import { MongooseUserQueryRepository } from '../../infrastructure/mongoose/repositories/mongooseUserQueryRepository';
-import { User } from '../../domain/entities/user';
 
 describe('GetUserByIdHandler Integration', () => {
   jest.setTimeout(20000);
 
   let handler: GetUserByIdHandler;
-  let userModel: Model<User>;
+  let userModel: Model<UserModel>;
   let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {
@@ -33,7 +32,7 @@ describe('GetUserByIdHandler Integration', () => {
     }).compile();
 
     handler = moduleRef.get(GetUserByIdHandler);
-    userModel = moduleRef.get(getModelToken('users'));
+    userModel = moduleRef.get<Model<UserModel>>(getModelToken('users'));
   });
 
   afterAll(async () => {
@@ -52,6 +51,7 @@ describe('GetUserByIdHandler Integration', () => {
       email: 'quinn@example.com',
       password: 'hashedPass',
       bio: 'Filmfan',
+      role: 'user'
     });
 
     const result = await handler.execute({ id: 'user-id-123' });
@@ -59,7 +59,6 @@ describe('GetUserByIdHandler Integration', () => {
     expect(result.id).toBe(createdUser.id);
     expect(result.username).toBe(createdUser.username);
     expect(result.bio).toBe(createdUser.bio);
-
   });
 
   it('should throw error if user not found', async () => {

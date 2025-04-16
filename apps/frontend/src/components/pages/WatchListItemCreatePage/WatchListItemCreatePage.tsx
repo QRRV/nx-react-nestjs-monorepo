@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { apiRequest } from '../../../utils/apiClient';
-import { RoutePath } from '../../../routes';
 import { getUserId } from '../../../utils/auth';
 import { Movie } from '../../../entities/Movie';
 import WatchListItemForm from '../../organisms/WatchListItemForm/WatchListItemForm';

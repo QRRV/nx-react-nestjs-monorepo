@@ -62,6 +62,7 @@ describe('LoginUserHandler Integration', () => {
       email: 'quinn@example.com',
       password: hashed,
       bio: 'Filmgek',
+      role: 'user'
     });
 
     const query = new LoginUserQuery('quinn@example.com', 'SterkW8woord!');
@@ -83,6 +84,7 @@ describe('LoginUserHandler Integration', () => {
       email: 'quinn@example.com',
       password: hashed,
       bio: 'Filmgek',
+      role: 'user'
     });
 
     const query = new LoginUserQuery('quinn@example.com', 'verkeerd!');

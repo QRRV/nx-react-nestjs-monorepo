@@ -5,7 +5,6 @@ import { FontSize } from '../../../enums/FontSize';
 import { Color } from '../../../enums/Color';
 import style from './ReviewList.module.css';
 import ReviewCard from '../../molecules/Card/ReviewCard/ReviewCard';
-import { getUserId } from '../../../utils/auth';
 import { useNavigate } from 'react-router-dom';
 
 interface ReviewListProps {

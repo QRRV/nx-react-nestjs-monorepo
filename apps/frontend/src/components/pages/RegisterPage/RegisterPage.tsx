@@ -118,7 +118,7 @@ const RegisterPage = () => {
 
       <Dropdown
         label="Role"
-        options={Object.values(Role)}
+        options={Object.values(Role).map((role) => ({ label: role, value: role }))}
         {...register('role', { required: 'Role is required' })}
         error={errors.role?.message}
       />

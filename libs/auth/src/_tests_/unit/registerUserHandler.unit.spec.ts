@@ -24,7 +24,8 @@ describe('RegisterUserHandler', () => {
       'quinn',
       'quinn@example.com',
       'SterkW8woord!',
-      'Bio'
+      'Bio',
+      'user',
     );
 
     repo.create.mockImplementation((user: User) => Promise.resolve(user));
@@ -44,6 +45,7 @@ describe('RegisterUserHandler', () => {
     expect(jwtService.sign).toHaveBeenCalledWith({
       sub: expect.any(String),
       email: 'quinn@example.com',
+      role: 'user',
     });
   });
 });

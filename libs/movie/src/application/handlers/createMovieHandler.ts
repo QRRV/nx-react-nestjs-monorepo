@@ -20,7 +20,7 @@ export class CreateMovieHandler implements ICommandHandler<CreateMovieCommand> {
     const movie = new Movie(id, title, description, new Date(releaseDate), genres);
 
     const response = await this.repo.create(movie);
-    await this.graphRepo.createMovie(id, title,genres, command.token);
+    await this.graphRepo.createMovie(id, title, genres, command.token);
     return response;
   }
 }

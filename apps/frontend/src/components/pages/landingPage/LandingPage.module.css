@@ -1,1 +1,27 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.filters {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.toggle {
+  align-self: flex-start;
+}
+.switchWrapper {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+
+
 

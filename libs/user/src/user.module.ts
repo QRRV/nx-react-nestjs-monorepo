@@ -7,6 +7,8 @@ import { GetUserByIdHandler } from './application/handlers/getUserByIdHandler';
 import { MongooseUserQueryRepository } from './infrastructure/mongoose/repositories/mongooseUserQueryRepository';
 import { UpdateUserHandler } from './application/handlers/updateUserHandler';
 import { DeleteUserHandler } from './application/handlers/deleteUserHandler';
+import { WatchlistitemModule } from '@moviebuddy/watchlistitem';
+import { ReviewModule } from '@moviebuddy/review';
 
 const commandHandlers = [
   UpdateUserHandler,
@@ -20,8 +22,10 @@ const queryHandlers = [
 @Module({
   imports: [
     CqrsModule,
+    WatchlistitemModule,
+    ReviewModule,
     MongooseModule.forFeature([
-      { name: 'users', schema: UserSchema }
+      { name: 'users', schema: UserSchema },
     ])
   ],
   providers: [

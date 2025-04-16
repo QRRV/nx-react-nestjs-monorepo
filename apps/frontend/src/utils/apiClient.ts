@@ -1,6 +1,5 @@
 
-const BASE_URL = import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:3000/api';
-const NEO4J_URL = import.meta.env.VITE_RCMND_API_URL || 'http://localhost:3001/api';
+import { BASE_URL, NEO4J_URL } from './env';
 
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -16,7 +15,7 @@ export async function apiRequest<TResponse = any, TBody = any>(
   endpoint: string,
   options: RequestOptions<TBody> = {},
   isNeo4j = false,
-): Promise<TResponse> {
+): Promise<TResponse | null> {
   const { method = 'GET', body, headers = {}, authToken } = options;
 
   const fetchOptions: RequestInit = {
@@ -31,12 +30,19 @@ export async function apiRequest<TResponse = any, TBody = any>(
 
   const base = isNeo4j ? NEO4J_URL : BASE_URL;
 
-  const response = await fetch(`${base}${endpoint}`, fetchOptions);
+  try {
+    const response = await fetch(`${base}${endpoint}`, fetchOptions);
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || 'Request failed');
+    const data = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return data;
+  } catch (error) {
+    console.error('API request error:', error);
+    return null;
   }
-
-  return response.json();
 }
+

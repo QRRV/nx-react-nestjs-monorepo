@@ -46,6 +46,7 @@ const queryHandlers = [GetWatchlistByUserHandler]
   exports: [
     ...commandHandlers,
     ...queryHandlers,
+    MongooseModule
   ]
 })
 export class WatchlistitemModule {}

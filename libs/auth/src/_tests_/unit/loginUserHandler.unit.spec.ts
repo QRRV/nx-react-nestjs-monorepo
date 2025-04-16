@@ -26,7 +26,8 @@ describe('LoginUserHandler', () => {
       'quinn',
       'quinn@example.com',
       await bcrypt.hash('SterkW8woord!', 10),
-      'Bio'
+      'Bio',
+      'user'
     );
 
     repo.findByEmail.mockResolvedValue(user);
@@ -39,6 +40,7 @@ describe('LoginUserHandler', () => {
     expect(jwtService.sign).toHaveBeenCalledWith({
       sub: 'user-id',
       email: 'quinn@example.com',
+      role: 'user'
     });
   });
 
@@ -56,7 +58,8 @@ describe('LoginUserHandler', () => {
       'quinn',
       'quinn@example.com',
       await bcrypt.hash('SterkW8woord!', 10),
-      'Bio'
+      'Bio',
+      'user'
     );
 
     repo.findByEmail.mockResolvedValue(user);

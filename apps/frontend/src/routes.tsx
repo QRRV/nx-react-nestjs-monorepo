@@ -18,6 +18,7 @@ import ReviewDetailPage from './components/pages/ReviewDetailPage/ReviewDetailPa
 import WatchListDetailPage from './components/pages/WatchListDetailPage/WatchListDetailPage';
 import WatchListItemCreatePage from './components/pages/WatchListItemCreatePage/WatchListItemCreatePage';
 import WatchListItemEditPage from './components/pages/WatchListItemEditPage/WatchListItemEditPage';
+import FriendsPage from './components/pages/FriendsPage/FriendsPage';
 export type AppRoute = RouteObject & {
   path: string;
   element: JSX.Element;
@@ -41,6 +42,7 @@ export enum RoutePath {
   WATCHLIST_CREATE = '/users/:userId/watchlist/create',
   WATCHLIST_CREATE_FOR_MOVIE = '/users/:userId/watchlist/create/:movieId',
   WATCHLIST_EDIT = '/users/:userId/watchlist/:itemId/edit',
+  FRIENDS = '/users/:userId/friends',
 }
 
 
@@ -157,6 +159,14 @@ export const routes: AppRoute[] = [
     element: (
       <PrivateRoute>
         <WatchListItemEditPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: RoutePath.FRIENDS,
+    element: (
+      <PrivateRoute>
+        <FriendsPage />
       </PrivateRoute>
     ),
   },

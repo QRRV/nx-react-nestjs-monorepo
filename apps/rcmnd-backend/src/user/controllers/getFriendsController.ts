@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@moviebuddy/auth';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetFriendsQuery } from '@moviebuddy/user-graph';
@@ -8,9 +8,8 @@ export class GetFriendsController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get('friends')
-  async getFriends(@Req() req: any) {
-    const userId = req.user.id;
+  @Get(':userId/friends')
+  async getFriends(@Param('userId') userId: string) {
     return this.queryBus.execute(new GetFriendsQuery(userId));
   }
 }

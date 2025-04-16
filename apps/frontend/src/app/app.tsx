@@ -30,6 +30,7 @@ const App = () => {
           {isAdmin() &&
             <NavItem title="Admin Dashboard" isActive={location.pathname === RoutePath.ADMIN} onClick={() => handleNavItemClick(RoutePath.ADMIN)}/>
           }
+          <NavItem title="Friends" isActive={location.pathname.includes('friends')} onClick={() => handleNavItemClick(`/users/${getUserId()}/friends`)}/>
           <NavItem title="Profile" isActive={location.pathname.startsWith(RoutePath.PRE_PROFILE)} onClick={() => handleNavItemClick(RoutePath.PRE_PROFILE)}/>
           <Button onClick={handleLogout}>Logout</Button>
         </NavBar>

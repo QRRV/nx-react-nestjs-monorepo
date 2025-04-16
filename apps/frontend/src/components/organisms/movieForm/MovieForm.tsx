@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import Input from '../../molecules/input/Input';
 import Text from '../../atoms/text/Text';
 import Button from '../../atoms/button/Button';
@@ -9,14 +9,17 @@ import { Movie } from '../../../entities/Movie';
 import DatePicker from '../../molecules/datePicker/DatePicker';
 import { useEffect } from 'react';
 import styles from './MovieForm.module.css';
+import MultiSelectDropdown from '../../molecules/MultiSelectDropdown/MultiSelectDropdown';
+import { Genre } from '../../../enums/Genre';
 
 interface MovieFormValues {
   id: string;
   title: string;
   description: string;
-  genres: string;
+  genres: string[];
   releaseDate: string;
 }
+
 
 interface MovieFormProps {
   initialValues?: Partial<Movie>;
@@ -37,7 +40,7 @@ const MovieForm = ({ initialValues = {}, onSubmit, isEditMode = false }: MovieFo
       id: initialValues._id || '',
       title: initialValues.title || '',
       description: initialValues.description || '',
-      genres: initialValues.genres?.join(', ') || '',
+      genres: initialValues.genres || [],
       releaseDate: initialValues.releaseDate
         ? new Date(initialValues.releaseDate).toISOString().split('T')[0]
         : '',
@@ -47,16 +50,17 @@ const MovieForm = ({ initialValues = {}, onSubmit, isEditMode = false }: MovieFo
   const imdbId = watch('id');
   const isValidImdbId = /^tt\d{7,8}$/.test(imdbId);
 
-  const handleFormSubmit = (formData: MovieFormValues) => {
+  const handleFormSubmit: SubmitHandler<MovieFormValues> = (formData) => {
     const payload: Movie = {
       _id: formData.id,
       title: formData.title,
       description: formData.description,
-      genres: formData.genres.split(',').map((g) => g.trim()),
+      genres: formData.genres,
       releaseDate: formData.releaseDate,
     };
     onSubmit(payload);
   };
+
 
   useEffect(() => {
     if (initialValues?._id) setValue('id', initialValues._id);
@@ -144,17 +148,14 @@ const MovieForm = ({ initialValues = {}, onSubmit, isEditMode = false }: MovieFo
       </div>
 
       <div>
-        <Input
+        <MultiSelectDropdown
           label="Genres"
-          placeholder="e.g. Action, Comedy"
-          {...register('genres', { required: true })}
+          options={Object.values(Genre).map((g) => ({ value: g, label: g }))}
+          {...register('genres', { required: 'At least one genre is required' })}
+          error={errors.genres?.message}
         />
-        {errors.genres && (
-          <Text fontColor={Color.ERROR} fontSize={FontSize.SMALL}>
-            At least one genre is required
-          </Text>
-        )}
       </div>
+
 
       <div>
         <DatePicker

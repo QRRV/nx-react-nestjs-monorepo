@@ -11,3 +11,4 @@ export * from './application/handlers/deleteReviewHandler';
 export * from './application/commands/deleteReviewCommand';
 export * from './application/queries/getReviewsByUserQuery';
 export * from './application/handlers/getReviewsByUserHandler';
+export * from './infrastructure/mongoose/schemas/reviewSchema';

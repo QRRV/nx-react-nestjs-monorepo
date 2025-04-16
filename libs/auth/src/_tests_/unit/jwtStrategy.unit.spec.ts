@@ -20,7 +20,8 @@ describe('JwtStrategy', () => {
       'quinn',
       'quinn@example.com',
       'hashedpass',
-      'Filmgek'
+      'Filmgek',
+      'user',
     );
 
     repo.findById.mockResolvedValue(mockUser);

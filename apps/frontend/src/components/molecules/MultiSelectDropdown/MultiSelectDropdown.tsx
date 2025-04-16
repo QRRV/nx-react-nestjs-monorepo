@@ -1,19 +1,19 @@
-import style from './Dropdown.module.css';
+import style from './MultiSelectDropdown.module.css';
 import { forwardRef, SelectHTMLAttributes } from 'react';
+import Text from '../../atoms/text/Text';
 import { Color } from '../../../enums/Color';
 import { FontSize } from '../../../enums/FontSize';
 import { FontWeight } from '../../../enums/FontWeight';
-import Text from '../../atoms/text/Text';
 
-interface DropdownProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  options: { label: string; value: string }[];
+interface MultiSelectDropdownProps
+  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'multiple'> {
+  options: { value: string; label: string }[];
   label?: string;
   error?: string;
-  placeholder?: string;
 }
 
-const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
-  ({ options, label, error, placeholder = 'Select an option', ...rest }, ref) => {
+const MultiSelectDropdown = forwardRef<HTMLSelectElement, MultiSelectDropdownProps>(
+  ({ options, label, error, ...rest }, ref) => {
     return (
       <div className={style.wrapper}>
         {label && (
@@ -26,8 +26,7 @@ const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
           </Text>
         )}
 
-        <select ref={ref} className={style.select} {...rest}>
-          <option value="">{placeholder}</option>
+        <select ref={ref} multiple className={style.select} {...rest}>
           {options.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
@@ -45,4 +44,4 @@ const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
   }
 );
 
-export default Dropdown;
+export default MultiSelectDropdown;

@@ -2,16 +2,15 @@ import { Test } from '@nestjs/testing';
 import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose, { Model } from 'mongoose';
-import { UpdateUserHandler } from '../../application/handlers/updateUserHandler';
-import { UserSchema } from '../../infrastructure/mongoose/schemas/userSchema';
-import { MongooseUserCommandRepository } from '../../infrastructure/mongoose/repositories/mongooseUserCommandRepository';
-import { User } from '../../domain/entities/user';
+import { GetUserByIdHandler } from '../../application/handlers/getUserByIdHandler';
+import { UserSchema, UserModel } from '../../infrastructure/mongoose/schemas/userSchema';
+import { MongooseUserQueryRepository } from '../../infrastructure/mongoose/repositories/mongooseUserQueryRepository';
 
-describe('UpdateUserHandler Integration', () => {
+describe('GetUserByIdHandler Integration', () => {
   jest.setTimeout(20000);
 
-  let handler: UpdateUserHandler;
-  let userModel: Model<User>;
+  let handler: GetUserByIdHandler;
+  let userModel: Model<UserModel>;
   let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {
@@ -24,16 +23,16 @@ describe('UpdateUserHandler Integration', () => {
         MongooseModule.forFeature([{ name: 'users', schema: UserSchema }]),
       ],
       providers: [
-        UpdateUserHandler,
+        GetUserByIdHandler,
         {
-          provide: 'UserCommandRepository',
-          useClass: MongooseUserCommandRepository,
+          provide: 'UserQueryRepository',
+          useClass: MongooseUserQueryRepository,
         },
       ],
     }).compile();
 
-    handler = moduleRef.get(UpdateUserHandler);
-    userModel = moduleRef.get(getModelToken('users'));
+    handler = moduleRef.get(GetUserByIdHandler);
+    userModel = moduleRef.get<Model<UserModel>>(getModelToken('users'));
   });
 
   afterAll(async () => {
@@ -45,53 +44,24 @@ describe('UpdateUserHandler Integration', () => {
     await userModel.deleteMany({});
   });
 
-  it('should update user data', async () => {
+  it('should get user by id', async () => {
     const createdUser = await userModel.create({
       _id: 'user-id-123',
       username: 'quinn',
       email: 'quinn@example.com',
       password: 'hashedPass',
       bio: 'Filmfan',
+      role: 'user'
     });
 
-    const command = {
-      targetUserId: 'user-id-123',
-      requestingUserId: 'user-id-123',
-      updates: { username: 'updatedQuinn', bio: 'Updated bio' },
-    };
+    const result = await handler.execute({ id: 'user-id-123' });
 
-    const result = await handler.execute(command);
-
-    expect(result.username).toBe('updatedQuinn');
-    expect(result.bio).toBe('Updated bio');
-    expect(result.email).toBe(createdUser.email);
-  });
-
-  it('should throw error if user is not the owner', async () => {
-    await userModel.create({
-      _id: 'user-id-123',
-      username: 'quinn',
-      email: 'quinn@example.com',
-      password: 'hashedPass',
-      bio: 'Filmfan',
-    });
-
-    const command = {
-      targetUserId: 'user-id-123',
-      requestingUserId: 'wrong-user-id',
-      updates: { username: 'updatedQuinn', bio: 'Updated bio' },
-    };
-
-    await expect(handler.execute(command)).rejects.toThrowError('Unauthorized to update this user');
+    expect(result.id).toBe(createdUser.id);
+    expect(result.username).toBe(createdUser.username);
+    expect(result.bio).toBe(createdUser.bio);
   });
 
   it('should throw error if user not found', async () => {
-    const command = {
-      targetUserId: 'non-existent-id',
-      requestingUserId: 'user-id-123',
-      updates: { username: 'updatedQuinn', bio: 'Updated bio' },
-    };
-
-    await expect(handler.execute(command)).rejects.toThrowError('User not found');
+    await expect(handler.execute({ id: 'non-existent-id' })).rejects.toThrowError('User not found');
   });
 });

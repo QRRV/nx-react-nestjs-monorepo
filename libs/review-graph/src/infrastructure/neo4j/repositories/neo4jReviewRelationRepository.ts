@@ -29,6 +29,5 @@ export class Neo4jReviewRelationRepository implements ReviewRelationRepository {
     `,
       { userId, reviewId }
     );
-    console.log(userId, reviewId)
   }
 }

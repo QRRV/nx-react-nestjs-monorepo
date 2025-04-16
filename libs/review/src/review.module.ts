@@ -44,6 +44,6 @@ const queryHandlers = [
       useClass: HttpReviewGraphWriteRepository,
     },
   ],
-  exports: [...commandHandlers, ...queryHandlers],
+  exports: [...commandHandlers, ...queryHandlers, MongooseModule],
 })
 export class ReviewModule {}

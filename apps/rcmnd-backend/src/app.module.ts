@@ -22,6 +22,7 @@ import { UserGraphModule } from '@moviebuddy/user-graph';
 import { MovieGraphModule } from '@moviebuddy/movie-graph';
 import { CreateMovieGraphController } from './movie/createMovieGraphController';
 import {} from '@nestjs/config'
+import {} from 'nest-neo4j'
 
 const reviewControllers = [
   CreateReviewRelationController,

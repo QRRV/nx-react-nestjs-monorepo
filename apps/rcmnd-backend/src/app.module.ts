@@ -21,6 +21,7 @@ import { SharedModule } from '@moviebuddy/shared';
 import { UserGraphModule } from '@moviebuddy/user-graph';
 import { MovieGraphModule } from '@moviebuddy/movie-graph';
 import { CreateMovieGraphController } from './movie/createMovieGraphController';
+import {} from '@nestjs/config'
 
 const reviewControllers = [
   CreateReviewRelationController,

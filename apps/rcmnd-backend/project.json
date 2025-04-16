@@ -21,6 +21,26 @@
           "buildTarget": "rcmnd-backend:build:production"
         }
       }
+    },
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/rcmnd-backend",
+        "main": "apps/rcmnd-backend/src/main.ts",
+        "tsConfig": "apps/rcmnd-backend/tsconfig.app.json",
+        "assets": ["apps/rcmnd-backend/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/rcmnd-backend/webpack.config.js",
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
     }
   }
 }

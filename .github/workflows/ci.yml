@@ -63,7 +63,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'HIER DE NAAM VAN JE AZURE STATIC WEB APP'
+          app-name: 'data-backend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
           package: .

@@ -1,6 +1,6 @@
 
-export const BASE_URL = 'https://data-backend.azurewebsites.net/api';
-export const NEO4J_URL = 'https://rcmnd-backend-eac4fgeycmf2gdee.westeurope-01.azurewebsites.net/api';
+export const BASE_URL = 'http://localhost:3000/api';
+export const NEO4J_URL = 'http://localhost:3001/api';
 
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';

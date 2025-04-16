@@ -9,6 +9,8 @@ on:
       - main
   workflow_dispatch:
 
+# ... rest of your workflow
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,60 +27,22 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          # npm run test --if-present
+
+      - name: Copy package files for backends
+        run: |
+          # Copy package.json and package-lock.json for each backend into their dist directories
+          cp apps/data-backend/package.json dist/apps/data-backend/
+          cp apps/data-backend/package-lock.json dist/apps/data-backend/
+          cp apps/rcmnd-backend/package.json dist/apps/rcmnd-backend/
+          cp apps/rcmnd-backend/package-lock.json dist/apps/rcmnd-backend/
 
       - name: Zip artifacts for deployment
         run: |
-          echo ${GITHUB_WORKSPACE}
           cd ${GITHUB_WORKSPACE}/dist/apps/data-backend/ && zip ${GITHUB_WORKSPACE}/data-backend-release.zip ./* -r
           cd ${GITHUB_WORKSPACE}/dist/apps/rcmnd-backend/ && zip ${GITHUB_WORKSPACE}/rcmnd-backend-release.zip ./* -r
           cd ${GITHUB_WORKSPACE}/dist/apps/nx-react-nestjs/ && zip ${GITHUB_WORKSPACE}/nx-react-nestjs-release.zip ./* -r
 
-      - name: Upload nx-react-nestjs artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: nx-react-nestjs
-          path: nx-react-nestjs-release.zip
-
-      - name: Upload data-backend artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: data-backend
-          path: data-backend-release.zip
-
-      - name: Upload rcmnd-backend artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: rcmnd-backend
-          path: rcmnd-backend-release.zip
-
-  deploy-nx-react-nestjs:
-    runs-on: ubuntu-latest
-    name: Deploy Angular Frontend
-    needs: build
-    environment:
-      name: 'Production'
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: nx-react-nestjs
-
-      - name: Unzip artifact for deployment
-        run: unzip nx-react-nestjs-release.zip
-
-      - name: Deploy to static azure web app
-        id: builddeploy
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.REACT_PUBLISHTOKEN }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          action: 'upload'
-          app_location: '/' # App source code path
-          api_location: '' # Api source code path - optional
-          output_location: 'dist/apps/nx-react-nestjs' # Built app content directory - optional
-          github_id_token: ${{ steps.idtoken.outputs.result }}
+      # ... rest of the build job steps
 
   deploy-data-backend:
     runs-on: ubuntu-latest
@@ -98,7 +62,7 @@ jobs:
         run: unzip data-backend-release.zip
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --production
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -108,7 +72,6 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
           package: .
-
 
   deploy-rcmnd-backend:
     runs-on: ubuntu-latest
@@ -128,7 +91,7 @@ jobs:
         run: unzip rcmnd-backend-release.zip
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --production
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp

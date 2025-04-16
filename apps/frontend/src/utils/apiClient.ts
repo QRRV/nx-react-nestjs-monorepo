@@ -1,7 +1,6 @@
-import * as process from 'node:process';
 
-export const BASE_URL = process.env.VITE_BACKEND_API_URL || 'http://localhost:3000/api';
-export const NEO4J_URL = process.env.VITE_RCMND_API_URL || 'http://localhost:3001/api';
+export const BASE_URL = 'https://data-backend.azurewebsites.net/api';
+export const NEO4J_URL = 'https://rcmnd-backend-eac4fgeycmf2gdee.westeurope-01.azurewebsites.net/api';
 
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';

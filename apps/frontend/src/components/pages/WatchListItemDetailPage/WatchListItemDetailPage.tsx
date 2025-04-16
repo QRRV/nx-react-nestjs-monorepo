@@ -8,9 +8,9 @@ import Button from '../../atoms/button/Button';
 import { FontSize } from '../../../enums/FontSize';
 import { FontWeight } from '../../../enums/FontWeight';
 import { Color } from '../../../enums/Color';
-import style from './WatchlistItemDetailPage.module.css';
 import { WatchListItem } from '../../../entities/WatchListItem';
 import { Movie } from '../../../entities/Movie';
+import style from './WatchListItemDetailPage.module.css';
 
 const WatchlistItemDetailPage = () => {
   const { itemId } = useParams<{ itemId: string }>();

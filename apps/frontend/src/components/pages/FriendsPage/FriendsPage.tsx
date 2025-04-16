@@ -22,7 +22,6 @@ const FriendsPage = () => {
           return;
         }
 
-        // get friendIds from Neo4j
         const friendIdsRes = await apiRequest(`/users/${userId}/friends`, {
           method: 'GET',
           authToken: token,

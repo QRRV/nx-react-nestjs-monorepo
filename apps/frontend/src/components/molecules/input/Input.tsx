@@ -7,7 +7,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-// forwardRef makes this compatible with react-hook-form
 const Input = forwardRef<HTMLInputElement, InputProps>(({ label, ...inputProps }, ref) => {
   return (
     <div className={style.inputWrapper}>

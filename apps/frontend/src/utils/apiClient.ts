@@ -1,5 +1,7 @@
+import * as process from 'node:process';
 
-import { BASE_URL, NEO4J_URL } from './env';
+export const BASE_URL = process.env.VITE_BACKEND_API_URL || 'http://localhost:3000/api';
+export const NEO4J_URL = process.env.VITE_RCMND_API_URL || 'http://localhost:3001/api';
 
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';

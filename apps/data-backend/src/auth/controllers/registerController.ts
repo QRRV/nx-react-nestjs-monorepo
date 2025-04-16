@@ -12,7 +12,8 @@ export class RegisterController {
       dto.username,
       dto.email,
       dto.password,
-      dto.bio
+      dto.bio,
+      dto.role
     );
 
     return this.commandBus.execute(command);

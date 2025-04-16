@@ -1,0 +1,22 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr; /* default: mobile = 1 */
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+/* Medium screens = 2 cards */
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large screens = 3 cards */
+@media (min-width: 1500px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

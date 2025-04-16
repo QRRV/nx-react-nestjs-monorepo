@@ -1,0 +1,9 @@
+.wrapper {
+  padding: 1rem;
+}
+
+.header {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}

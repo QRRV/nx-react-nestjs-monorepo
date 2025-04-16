@@ -1,0 +1,12 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1rem 0;
+}
+
+.submitButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}

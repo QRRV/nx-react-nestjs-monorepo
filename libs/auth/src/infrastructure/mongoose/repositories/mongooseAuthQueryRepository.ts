@@ -18,7 +18,8 @@ export class MongooseAuthQueryRepository implements AuthQueryRepository {
       user.username,
       user.email,
       user.password,
-      user.bio
+      user.bio,
+      user.role
     );
   }
 
@@ -31,7 +32,8 @@ export class MongooseAuthQueryRepository implements AuthQueryRepository {
       user.username,
       user.email,
       user.password,
-      user.bio
+      user.bio,
+      user.role
     );
   }
 }

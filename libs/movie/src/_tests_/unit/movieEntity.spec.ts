@@ -13,7 +13,7 @@ describe('Movie Entity', () => {
 
     expect(movie._id).toBe('tt1375666')
     expect(movie.title).toBe('Inception')
-    expect(movie.genre).toEqual(['Action', 'Sci-Fi', 'Thriller'])
+    expect(movie.genres).toEqual(['Action', 'Sci-Fi', 'Thriller'])
     expect(movie.hasWonAwards).toBe(true)
   })
 

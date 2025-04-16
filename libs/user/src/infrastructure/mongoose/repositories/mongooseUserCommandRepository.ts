@@ -33,7 +33,8 @@ export class MongooseUserCommandRepository implements UserCommandRepository {
       saved.username,
       saved.email,
       saved.password,
-      saved.bio
+      saved.bio,
+      saved.role,
     );
   }
 

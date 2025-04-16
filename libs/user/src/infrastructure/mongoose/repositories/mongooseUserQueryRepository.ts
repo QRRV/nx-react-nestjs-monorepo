@@ -19,7 +19,8 @@ export class MongooseUserQueryRepository implements UserQueryRepository {
       found.username,
       found.email,
       found.password,
-      found.bio
+      found.bio,
+      found.role
     );
   }
 }

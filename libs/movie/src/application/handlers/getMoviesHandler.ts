@@ -8,7 +8,7 @@ import { Movie } from '../../domain/entities/movie'
 export class GetMoviesHandler implements IQueryHandler<GetMoviesQuery> {
   constructor(
     @Inject('MovieQueryRepository')
-    private readonly repo: MovieQueryRepository
+    private readonly repo: MovieQueryRepository,
   ) {}
 
   async execute(): Promise<Movie[]> {

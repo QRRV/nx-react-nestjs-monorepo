@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import { ReviewCommandRepository } from '../../../domain/ports/reviewCommandRepository';
 import { Review } from '../../../domain/entities/review';
 import { ReviewModel } from '../schemas/reviewSchema';
-import { NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 
 export class MongooseReviewCommandRepository implements ReviewCommandRepository {
   constructor(
@@ -12,8 +12,18 @@ export class MongooseReviewCommandRepository implements ReviewCommandRepository 
   ) {}
 
   async create(review: Review): Promise<Review> {
+    const existing = await this.model.findOne({
+      userId: review.userId,
+      movieId: review.movieId,
+    });
+
+    if (existing) {
+      throw new ConflictException('You have already reviewed this movie');
+    }
+
     const created = new this.model(review);
     const saved = await created.save();
+
     return new Review(
       saved.id,
       saved.userId,
@@ -23,6 +33,7 @@ export class MongooseReviewCommandRepository implements ReviewCommandRepository 
       saved.reviewDate,
     );
   }
+
 
   async delete(reviewId: string, userId: string): Promise<boolean> {
     const found = await this.model.findById(reviewId).exec()

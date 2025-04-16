@@ -11,8 +11,7 @@
       "dependsOn": ["build"],
       "options": {
         "buildTarget": "rcmnd-backend:build",
-        "runBuildTargetDependencies": false,
-        "generatePackageJson": true
+        "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
@@ -20,26 +19,6 @@
         },
         "production": {
           "buildTarget": "rcmnd-backend:build:production"
-        }
-      },
-      "build": {
-        "executor": "@nx/js:node",
-        "defaultConfiguration": "development",
-        "dependsOn": [
-          "build"
-        ],
-        "options": {
-          "buildTarget": "rcmnd-backend:build",
-          "runBuildTargetDependencies": false,
-          "generatePackageJson": true
-        },
-        "configurations": {
-          "development": {
-            "buildTarget": "rcmnd-backend:build:development"
-          },
-          "production": {
-            "buildTarget": "rcmnd-backend:build:production"
-          }
         }
       }
     }

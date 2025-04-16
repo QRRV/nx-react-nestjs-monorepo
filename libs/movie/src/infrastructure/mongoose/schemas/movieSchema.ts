@@ -16,10 +16,7 @@ export class MovieModel extends Document {
   releaseDate!: Date
 
   @Prop({ type: [String], required: true })
-  genre!: string[]
-
-  @Prop({ required: true })
-  hasWonAwards!: boolean
+  genres!: string[]
 }
 
 export const MovieSchema = SchemaFactory.createForClass(MovieModel)

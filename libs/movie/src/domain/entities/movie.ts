@@ -4,11 +4,10 @@ export class Movie {
     public readonly title: string,
     public readonly description: string,
     public readonly releaseDate: Date,
-    public readonly genre: string[],
-    public readonly hasWonAwards: boolean
+    public readonly genres: string[]
   ) {
-    if (!/^tt\d{7}$/.test(_id)) {
-      throw new Error('Invalid IMDB ID format')
+    if (!/^tt\d{7,8}$/.test(_id)) {
+      throw new Error('Invalid IMDB ID format');
     }
   }
 }

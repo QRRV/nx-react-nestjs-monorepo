@@ -16,6 +16,9 @@ export class AuthUserModel {
 
   @Prop({ required: true })
   bio!: string;
+
+  @Prop({ required: true })
+  role!: 'user' | 'admin';
 }
 
 export const AuthUserSchema = SchemaFactory.createForClass(AuthUserModel);

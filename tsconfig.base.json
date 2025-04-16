@@ -18,6 +18,7 @@
       "@data-backend/app": ["apps/data-backend/src/app.module.ts"],
       "@moviebuddy/auth": ["libs/auth/src/index.ts"],
       "@moviebuddy/movie": ["libs/movie/src/index.ts"],
+      "@moviebuddy/movie-graph": ["libs/movie-graph/src/index.ts"],
       "@moviebuddy/movielistitem-graph": [
         "libs/movielistitem-graph/src/index.ts"
       ],

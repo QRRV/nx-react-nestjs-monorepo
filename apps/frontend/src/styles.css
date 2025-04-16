@@ -1,1 +1,126 @@
 /* You can add global styles to this file, and also import other style files */
+
+p {
+  font-family: Inter, serif;
+}
+
+body {
+  margin-left: 20vw;
+  margin-right: 20vw;
+}
+
+:root {
+  /* Font weights */
+  --font-weight-thin: 100;
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+  --font-weight-super-bold: 900;
+
+  /* Colors */
+  --color-primary: #5465ff;
+  --color-secondary: #788bff;
+  --color-tertiary: #9bb1ff;
+  --color-quaternary: #bfd7ff;
+  --color-quinary: #e2fdff;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-error: #ff0000;
+  --color-success: #00ff00;
+  --color-warning: #ffff00;
+  --color-info: #00ffff;
+  --color-gray: #808080;
+}
+
+/* Font Weights */
+.font-weight-thin {
+  font-weight: var(--font-weight-thin);
+}
+.font-weight-extra-light {
+  font-weight: var(--font-weight-extra-light);
+}
+.font-weight-light {
+  font-weight: var(--font-weight-light);
+}
+.font-weight-regular {
+  font-weight: var(--font-weight-regular);
+}
+.font-weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+.font-weight-semibold {
+  font-weight: var(--font-weight-semi-bold);
+}
+.font-weight-bold {
+  font-weight: var(--font-weight-bold);
+}
+.font-weight-extra-bold {
+  font-weight: var(--font-weight-extra-bold);
+}
+.font-weight-super-bold {
+  font-weight: var(--font-weight-super-bold);
+}
+
+
+/* Colors */
+.color-primary {
+  color: var(--color-primary);
+}
+.color-secondary {
+  color: var(--color-secondary);
+}
+.color-tertiary {
+  color: var(--color-tertiary);
+}
+.color-quaternary {
+  color: var(--color-quaternary);
+}
+.color-quinary {
+  color: var(--color-quinary);
+}
+.color-black {
+  color: var(--color-black);
+}
+.color-white {
+  color: var(--color-white);
+}
+.color-error {
+  color: var(--color-error);
+}
+.color-success {
+  color: var(--color-success);
+}
+.color-warning {
+  color: var(--color-warning);
+}
+.color-info {
+  color: var(--color-info);
+}
+.color-gray {
+  color: var(--color-gray);
+}
+
+/* Font Sizes */
+.font-size-small {
+  font-size: 0.75rem;
+}
+.font-size-medium {
+  font-size: 1rem;
+}
+.font-size-large {
+  font-size: 1.25rem;
+}
+.font-size-xlarge {
+  font-size: 1.5rem;
+}
+.font-size-xxlarge {
+  font-size: 2rem;
+}
+.font-size-xxxlrge {
+  font-size: 3rem;
+}
+

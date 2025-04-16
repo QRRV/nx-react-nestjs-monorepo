@@ -4,7 +4,8 @@ export class User {
     public readonly username: string,
     public readonly email: string,
     public readonly password: string,
-    public readonly bio: string
+    public readonly bio: string,
+    public readonly role: 'user' | 'admin'
   ) {}
 
   toSafeObject() {
@@ -12,7 +13,8 @@ export class User {
       id: this.id,
       username: this.username,
       email: this.email,
-      bio: this.bio
+      bio: this.bio,
+      role: this.role
     };
   }
 }

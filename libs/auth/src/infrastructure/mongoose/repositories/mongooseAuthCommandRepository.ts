@@ -18,6 +18,7 @@ export class MongooseAuthCommandRepository implements AuthCommandRepository {
         email: user.email,
         password: user.password,
         bio: user.bio,
+        role: user.role
       });
 
       const saved = await created.save();
@@ -27,7 +28,8 @@ export class MongooseAuthCommandRepository implements AuthCommandRepository {
         saved.username,
         saved.email,
         saved.password,
-        saved.bio
+        saved.bio,
+        saved.role
       );
     } catch (err: unknown) {
       if (

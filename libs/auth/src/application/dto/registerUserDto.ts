@@ -19,4 +19,8 @@ export class RegisterUserDto {
   @IsNotEmpty()
   @IsString()
   bio!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  role!: 'user' | 'admin';
 }

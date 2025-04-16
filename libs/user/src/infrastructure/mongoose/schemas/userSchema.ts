@@ -17,6 +17,9 @@ export class UserModel extends Document {
 
   @Prop({ required: true })
   bio!: string;
+
+  @Prop({ required: true })
+  role!: 'user' | 'admin';
 }
 
 export const UserSchema = SchemaFactory.createForClass(UserModel);

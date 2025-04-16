@@ -24,6 +24,9 @@ import { LoginController } from './auth/controllers/loginController';
 import { AuthModule } from '@moviebuddy/auth';
 import * as process from 'node:process';
 import { SharedModule } from '@moviebuddy/shared';
+import { CreateMovieController } from './movie/controllers/createMovieController';
+import { UpdateMovieController } from './movie/controllers/updateMovieController';
+import { DeleteMovieController } from './movie/controllers/deleteMovieController';
 
 
 const reviewControllers = [
@@ -36,7 +39,10 @@ const reviewControllers = [
 
 const movieControllers = [
   GetMovieByIdController,
-  GetMoviesController
+  GetMoviesController,
+  CreateMovieController,
+  UpdateMovieController,
+  DeleteMovieController
 ];
 
 const watchlistItemControllers = [

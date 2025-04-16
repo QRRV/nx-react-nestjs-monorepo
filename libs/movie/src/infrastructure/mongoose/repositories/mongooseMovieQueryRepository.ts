@@ -19,8 +19,7 @@ export class MongooseMovieQueryRepository implements MovieQueryRepository {
           doc.title,
           doc.description,
           doc.releaseDate,
-          doc.genre,
-          doc.hasWonAwards
+          doc.genres,
         )
     )
 
@@ -34,8 +33,7 @@ export class MongooseMovieQueryRepository implements MovieQueryRepository {
       doc.title,
       doc.description,
       doc.releaseDate,
-      doc.genre,
-      doc.hasWonAwards
+      doc.genres
     )
   }
 }

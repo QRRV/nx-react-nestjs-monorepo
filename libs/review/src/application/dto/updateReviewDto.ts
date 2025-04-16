@@ -1,10 +1,12 @@
-import { IsOptional, IsNumber, IsString, IsNotEmpty } from 'class-validator';
+import { IsOptional, IsNumber, IsString, IsNotEmpty, Max, Min } from 'class-validator';
 
 export class UpdateReviewDto {
 
   @IsOptional()
   @IsNumber()
-  rating?: number;
+  @Max(10)
+  @Min(1)
+  rating!: number;
 
   @IsOptional()
   @IsNotEmpty()

@@ -16,6 +16,7 @@ const commandHandlers = [
   UpdateReviewHandler,
   DeleteReviewHandler
 ];
+
 const queryHandlers = [
   GetReviewsByMovieHandler,
   GetReviewsByUserHandler

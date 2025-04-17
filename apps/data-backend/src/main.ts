@@ -10,6 +10,7 @@ import { TransformInterceptor } from '@moviebuddy/shared';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -17,6 +18,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
   app.useGlobalInterceptors(new TransformInterceptor());
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);

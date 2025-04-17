@@ -6,7 +6,7 @@ import { ReviewGraphWriteRepository } from '../../../domain/ports/reviewGraphWri
 export class HttpReviewGraphWriteRepository
   implements ReviewGraphWriteRepository
 {
-  private readonly baseUrl = 'https://rcmnd-backend-eac4fgeycmf2gdee.westeurope-01.azurewebsites.net';
+  private readonly baseUrl = 'https://rcmnd-backend-eac4fgeycmf2gdee.westeurope-01.azurewebsites.net/api';
 
   async createReviewRelation(
     movieId: string,

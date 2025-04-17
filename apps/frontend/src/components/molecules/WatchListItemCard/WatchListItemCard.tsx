@@ -39,17 +39,26 @@ const WatchListItemCard = ({ item, onEditClick, onRemoveClick, onGoToMovieClick,
 
       <div className={style.actions}>
         {onGoToMovieClick && (
-          <Button onClick={() => onGoToMovieClick(item.movieId)}>
+          <Button onClick={(e) => {
+            e.stopPropagation();
+            onGoToMovieClick(item.movieId);
+          }}>
             Go to Movie
           </Button>
         )}
         {onEditClick && (
-          <Button onClick={() => onEditClick(item.id)}>
+          <Button onClick={(e) => {
+            e.stopPropagation();
+            onEditClick(item.id)
+          }}>
             Edit
           </Button>
         )}
         {onRemoveClick && (
-          <Button variant="danger" onClick={() => onRemoveClick(item.id)}>
+          <Button variant="danger" onClick={(e) => {
+            e.stopPropagation();
+            onRemoveClick(item.id);
+          }}>
             Remove
           </Button>
         )}

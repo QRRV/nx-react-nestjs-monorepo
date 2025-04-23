@@ -27,6 +27,15 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
+      - name: Add staticwebapp.config.json for SPA routing
+        run: |
+          echo '{
+            "navigationFallback": {
+              "rewrite": "/index.html",
+              "exclude": ["/api/*"]
+            }
+          }' > dist/apps/nx-react-nestjs/staticwebapp.config.json
+
       - name: Zip artifacts for deployment
         run: |
           echo ${GITHUB_WORKSPACE}

@@ -5,8 +5,8 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
 import { WatchlistItem } from '../../domain/entities/watchlistItem'
 import { UpdateWatchlistItemCommand } from '../../application/commands/updateWatchlistItemCommand'
 import { UpdateWatchlistItemHandler } from '../../application/handlers/updateWatchlistItemHandler'
-import { WatchlistItemSchema } from '../../infrastructure/mongoose/schemas/watchlistItemSchema'
-import { MongooseWatchlistItemCommandRepository } from '../../infrastructure/mongoose/repositories/mongooseWatchlistItemCommandRepository'
+import { WatchlistItemSchema } from '../../infrastructure/adapters/mongoose/schemas/watchlistItemSchema'
+import { MongooseWatchlistItemCommandRepository } from '../../infrastructure/adapters/mongoose/repositories/mongooseWatchlistItemCommandRepository'
 
 describe('UpdateWatchlistItemHandler Integration', () => {
   jest.setTimeout(20000)

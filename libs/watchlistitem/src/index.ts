@@ -9,4 +9,4 @@ export * from './application/handlers/updateWatchlistItemHandler';
 export * from './application/dto/updateWatchlistItemDto';
 export * from './application/commands/deleteWatchlistItemCommand';
 export * from './application/handlers/deleteWatchlistItemHandler';
-export * from './infrastructure/mongoose/schemas/watchlistItemSchema';
+export * from './infrastructure/adapters/mongoose/schemas/watchlistItemSchema';

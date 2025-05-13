@@ -1,6 +1,6 @@
 import { RegisterUserHandler } from '../../application/handlers/registerUserHandler';
 import { RegisterUserCommand } from '../../application/commands/registerUserCommand';
-import { User } from '@moviebuddy/user';
+import { User } from '@moviebuddy/shared';
 
 describe('RegisterUserHandler', () => {
   let handler: RegisterUserHandler;

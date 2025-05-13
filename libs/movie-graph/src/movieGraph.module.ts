@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { CreateMovieGraphHandler } from './application/handler/createMovieGraphHandler';
-import { Neo4jMovieGraphCommandRepository } from './infrastructure/repositories/Neo4jMovieGraphCommandRepository';
+import { Neo4jMovieGraphCommandRepository } from './infrastructure/adapters/neo4j/repositories/Neo4jMovieGraphCommandRepository';
 
 @Module({
   imports: [CqrsModule],

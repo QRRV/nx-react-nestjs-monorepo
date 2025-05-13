@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { QueryBus } from '@nestjs/cqrs';
 import { LoginUserQuery } from '../../application/queries/loginUserQuery';
-import { User } from '@moviebuddy/user';
+import { User } from '@moviebuddy/shared';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {

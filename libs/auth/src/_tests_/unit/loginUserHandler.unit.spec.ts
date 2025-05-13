@@ -1,7 +1,7 @@
 import { LoginUserHandler } from '../../application/handlers/loginUserHandler';
 import { LoginUserQuery } from '../../application/queries/loginUserQuery';
 import * as bcrypt from 'bcrypt';
-import { User } from '@moviebuddy/user';
+import { User } from '@moviebuddy/shared';
 
 describe('LoginUserHandler', () => {
   let handler: LoginUserHandler;

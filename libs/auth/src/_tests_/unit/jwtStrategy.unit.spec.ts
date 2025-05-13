@@ -1,6 +1,6 @@
 import { JwtStrategy } from '../../infrastructure/strategies/jwt.strategy';
 import { UnauthorizedException } from '@nestjs/common';
-import { User } from '@moviebuddy/user';
+import { User } from '@moviebuddy/shared';
 
 describe('JwtStrategy', () => {
   let strategy: JwtStrategy;

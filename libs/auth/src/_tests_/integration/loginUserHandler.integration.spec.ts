@@ -4,12 +4,12 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose, { Model } from 'mongoose';
 import { LoginUserHandler } from '../../application/handlers/loginUserHandler';
 import { LoginUserQuery } from '../../application/queries/loginUserQuery';
-import { AuthUserSchema } from '../../infrastructure/mongoose/schemas/authUserSchema';
-import { MongooseAuthQueryRepository } from '../../infrastructure/mongoose/repositories/mongooseAuthQueryRepository';
+import { AuthUserSchema } from '../../infrastructure/adapters/mongoose/schemas/authUserSchema';
+import { MongooseAuthQueryRepository } from '../../infrastructure/adapters/mongoose/repositories/mongooseAuthQueryRepository';
 import { JwtService } from '../../infrastructure/services/jwt.service';
 import * as bcrypt from 'bcrypt';
 import { JwtModule } from '@nestjs/jwt';
-import { User } from '@moviebuddy/user';
+import { User } from '@moviebuddy/shared';
 
 describe('LoginUserHandler Integration', () => {
   let handler: LoginUserHandler;

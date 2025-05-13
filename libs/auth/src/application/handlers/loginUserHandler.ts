@@ -4,7 +4,6 @@ import { LoginUserQuery } from '../queries/loginUserQuery';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '../../infrastructure/services/jwt.service';
 import { AuthQueryRepository } from '../../domain/ports/authQueryRepository';
-import { User } from '@moviebuddy/user';
 
 @QueryHandler(LoginUserQuery)
 export class LoginUserHandler implements IQueryHandler<LoginUserQuery> {

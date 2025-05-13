@@ -1,7 +1,7 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { User } from '@moviebuddy/user';
+import { User } from '@moviebuddy/shared';
 import { AuthQueryRepository } from '../../domain/ports/authQueryRepository';
 
 @Injectable()

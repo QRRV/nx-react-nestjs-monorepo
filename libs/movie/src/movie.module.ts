@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { CqrsModule } from '@nestjs/cqrs'
-import { MovieSchema } from './infrastructure/mongoose/schemas/movieSchema'
-import { MongooseMovieQueryRepository } from './infrastructure/mongoose/repositories/mongooseMovieQueryRepository'
+import { MovieSchema } from './infrastructure/adapters/mongoose/schemas/movieSchema'
+import { MongooseMovieQueryRepository } from './infrastructure/adapters/mongoose/repositories/mongooseMovieQueryRepository'
 import { GetMoviesHandler } from './application/handlers/getMoviesHandler'
 import { GetMovieByIdHandler } from './application/handlers/getMovieByIdHandler'
 import { CreateMovieHandler } from './application/handlers/createMovieHandler';
 import { UpdateMovieHandler } from './application/handlers/updateMovieHandler';
 import { DeleteMovieHandler } from './application/handlers/deleteMovieHandler';
-import { MongooseMovieCommandRepository } from './infrastructure/mongoose/repositories/mongooseMovieCommandRepository';
+import { MongooseMovieCommandRepository } from './infrastructure/adapters/mongoose/repositories/mongooseMovieCommandRepository';
 import {
   HttpNeo4jMovieCommandRepository
-} from './infrastructure/mongoose/repositories/httpNeo4jMovieCommandRepository';
+} from './infrastructure/adapters/mongoose/repositories/httpNeo4jMovieCommandRepository';
 import { WatchlistitemModule } from '@moviebuddy/watchlistitem';
 import { ReviewModule } from '@moviebuddy/review';
 

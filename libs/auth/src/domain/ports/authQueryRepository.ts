@@ -1,4 +1,4 @@
-import { User } from '@moviebuddy/user';
+import { User } from '@moviebuddy/shared';
 
 export interface AuthQueryRepository {
   findByEmail(email: string): Promise<User | null>;

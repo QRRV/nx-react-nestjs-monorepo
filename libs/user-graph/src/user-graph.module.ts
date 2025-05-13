@@ -5,8 +5,8 @@ import { AddFriendHandler } from './application/handlers/addFriendHandler';
 import { RemoveFriendHandler } from './application/handlers/removeFriendHandler';
 import { GetFriendsHandler } from './application/handlers/getFriendsHandler';
 
-import { Neo4jFriendshipRepository } from './infrastructure/neo4j/repositories/neo4jFriendshipRepository';
-import { Neo4jFriendReadRepository } from './infrastructure/neo4j/repositories/neo4jFriendReadRepository';
+import { Neo4jFriendshipRepository } from './infrastructure/adapters/neo4j/repositories/neo4jFriendshipRepository';
+import { Neo4jFriendReadRepository } from './infrastructure/adapters/neo4j/repositories/neo4jFriendReadRepository';
 
 const commandHandlers = [AddFriendHandler, RemoveFriendHandler];
 const queryHandlers = [GetFriendsHandler];

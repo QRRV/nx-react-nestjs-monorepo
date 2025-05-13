@@ -3,8 +3,8 @@ import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose, { Model } from 'mongoose';
 import { GetUserByIdHandler } from '../../application/handlers/getUserByIdHandler';
-import { UserSchema, UserModel } from '../../infrastructure/mongoose/schemas/userSchema';
-import { MongooseUserQueryRepository } from '../../infrastructure/mongoose/repositories/mongooseUserQueryRepository';
+import { UserSchema, UserModel } from '../../infrastructure/adapters/mongoose/schemas/userSchema';
+import { MongooseUserQueryRepository } from '../../infrastructure/adapters/mongoose/repositories/mongooseUserQueryRepository';
 
 describe('GetUserByIdHandler Integration', () => {
   jest.setTimeout(20000);

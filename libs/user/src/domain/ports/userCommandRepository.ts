@@ -1,4 +1,5 @@
-import { User } from '../entities/user';
+import { User } from '@moviebuddy/shared';
+
 
 export interface UserCommandRepository {
   update(

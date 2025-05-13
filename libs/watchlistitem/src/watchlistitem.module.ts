@@ -1,20 +1,20 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { CqrsModule } from '@nestjs/cqrs'
-import { WatchlistItemSchema } from './infrastructure/mongoose/schemas/watchlistItemSchema'
+import { WatchlistItemSchema } from './infrastructure/adapters/mongoose/schemas/watchlistItemSchema'
 import { CreateWatchlistItemHandler } from './application/handlers/createWatchlistItemHandler'
 import {
   MongooseWatchlistItemCommandRepository
-} from './infrastructure/mongoose/repositories/mongooseWatchlistItemCommandRepository';
+} from './infrastructure/adapters/mongoose/repositories/mongooseWatchlistItemCommandRepository';
 import { GetWatchlistByUserHandler } from './application/handlers/getWatchlistByUserHandler';
 import {
   MongooseWatchlistItemQueryRepository
-} from './infrastructure/mongoose/repositories/mongooseWatchlistItemQueryRepository';
+} from './infrastructure/adapters/mongoose/repositories/mongooseWatchlistItemQueryRepository';
 import { UpdateWatchlistItemHandler } from './application/handlers/updateWatchlistItemHandler';
 import { DeleteWatchlistItemHandler } from './application/handlers/deleteWatchlistItemHandler';
 import {
   HttpWatchlistGraphCommandRepository
-} from './infrastructure/neo4j/repositories/httpWatchlistGraphCommandRepository';
+} from './infrastructure/adapters/neo4j/repositories/httpWatchlistGraphCommandRepository';
 
 const commandHandlers = [
   CreateWatchlistItemHandler,

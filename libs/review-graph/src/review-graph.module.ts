@@ -3,7 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { Neo4jModule } from 'nest-neo4j';
 
 import { CreateReviewRelationHandler } from './application/handlers/createReviewRelationHandler';
-import { Neo4jReviewRelationRepository } from './infrastructure/neo4j/repositories/neo4jReviewRelationRepository';
+import { Neo4jReviewRelationRepository } from './infrastructure/adapters/neo4j/repositories/neo4jReviewRelationRepository';
 import { DeleteReviewRelationHandler } from './application/handlers/deleteReviewRelationHandler';
 
 const commandHandlers = [

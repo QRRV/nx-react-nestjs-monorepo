@@ -3,8 +3,8 @@ import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose, { Model } from 'mongoose';
 import { DeleteUserHandler } from '../../application/handlers/deleteUserHandler';
-import { UserSchema, UserModel } from '../../infrastructure/mongoose/schemas/userSchema';
-import { MongooseUserCommandRepository } from '../../infrastructure/mongoose/repositories/mongooseUserCommandRepository';
+import { UserSchema, UserModel } from '../../infrastructure/adapters/mongoose/schemas/userSchema';
+import { MongooseUserCommandRepository } from '../../infrastructure/adapters/mongoose/repositories/mongooseUserCommandRepository';
 import { WatchlistItemSchema } from '@moviebuddy/watchlistitem';
 import { ReviewSchema } from '@moviebuddy/review';
 

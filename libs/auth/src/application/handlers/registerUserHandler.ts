@@ -3,7 +3,7 @@ import { Inject } from '@nestjs/common';
 import { RegisterUserCommand } from '../commands/registerUserCommand';
 import { AuthCommandRepository } from '../../domain/ports/authCommandRepository';
 import { JwtService } from '../../infrastructure/services/jwt.service';
-import { User } from '@moviebuddy/user';
+import { User } from '@moviebuddy/shared';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
 

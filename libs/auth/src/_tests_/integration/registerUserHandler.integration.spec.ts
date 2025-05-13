@@ -4,9 +4,9 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose, { Model } from 'mongoose';
 import { RegisterUserHandler } from '../../application/handlers/registerUserHandler';
 import { RegisterUserCommand } from '../../application/commands/registerUserCommand';
-import { AuthUserSchema } from '../../infrastructure/mongoose/schemas/authUserSchema';
-import { MongooseAuthCommandRepository } from '../../infrastructure/mongoose/repositories/mongooseAuthCommandRepository';
-import { User } from '@moviebuddy/user';
+import { AuthUserSchema } from '../../infrastructure/adapters/mongoose/schemas/authUserSchema';
+import { MongooseAuthCommandRepository } from '../../infrastructure/adapters/mongoose/repositories/mongooseAuthCommandRepository';
+import { User } from '@moviebuddy/shared';
 import { JwtService } from '../../infrastructure/services/jwt.service';
 import { JwtModule } from '@nestjs/jwt';
 

@@ -7,15 +7,17 @@ import { LocalStrategy } from './infrastructure/strategies/local.strategy';
 import { JwtService } from './infrastructure/services/jwt.service';
 import { RegisterUserHandler } from './application/handlers/registerUserHandler';
 import { LoginUserHandler } from './application/handlers/loginUserHandler';
-import { MongooseAuthQueryRepository } from './infrastructure/mongoose/repositories/mongooseAuthQueryRepository';
-import { MongooseAuthCommandRepository } from './infrastructure/mongoose/repositories/mongooseAuthCommandRepository';
+import { MongooseAuthQueryRepository } from './infrastructure/adapters/mongoose/repositories/mongooseAuthQueryRepository';
+import { MongooseAuthCommandRepository } from './infrastructure/adapters/mongoose/repositories/mongooseAuthCommandRepository';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuthUserSchema } from './infrastructure/mongoose/schemas/authUserSchema';
+import { AuthUserSchema } from './infrastructure/adapters/mongoose/schemas/authUserSchema';
+import { SharedModule } from '@moviebuddy/shared';
 
 @Module({
   imports: [
     PassportModule,
     CqrsModule,
+    SharedModule,
     JwtModule.register({
       secret: process.env['JWT_SECRET'] || 'your_secret_key',
       signOptions: { expiresIn: '7d' },
